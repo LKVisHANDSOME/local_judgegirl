@@ -1,3 +1,4 @@
+from genericpath import isfile
 import os
 
 origindir = 'C:\\Users\\a2320\\Desktop\\judgegirl'
@@ -14,12 +15,13 @@ def replace(filename):
 def get_filelist(dir, Filelist):
     newDir = dir
     if os.path.isfile(dir):
-        if dir != os.path.join(basedir,'init.py') and dir != os.path.join(basedir,'init.exe'):
-            Filelist.append(dir)
+        Filelist.append(dir)
     elif os.path.isdir(dir):
         if dir != os.path.join(basedir,'downloads') and dir != os.path.join(basedir,'images'):
             for s in os.listdir(dir):
                 newDir = os.path.join(dir,s)
+                if os.path.isfile(newDir) and dir == basedir:
+                    continue
                 get_filelist(newDir,Filelist)
     return Filelist
 
