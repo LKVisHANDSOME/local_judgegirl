@@ -1,0 +1,123 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+char data[202][102];
+int datal[202];
+char set[202];
+int main()
+{
+  int datan;
+  int wordl;
+  int wordn;
+  int i;
+  int j;
+  int k;
+  int check;
+  int head;
+  char word[102];
+  int c=0;
+  char ans[102];
+  scanf("%d",&amp;datan);
+  {
+    for(i=0;i&lt; datan;i++)
+    {
+      scanf("%s",data[i]);
+      datal[i]=strlen(data[i]);
+    }
+  }
+  scanf("%d",&amp;wordn);
+  {
+    for(i=0;i&lt; wordn;i++)
+    {
+      scanf("%s",word);
+      c=0;
+      wordl=strlen(word);
+      printf("word: %s\n", word);
+      for(j=0;j&lt; wordn;j++)
+      {
+        printf("dict[%d]: %s\n", j, data[j]);
+        set[j]=0;
+        if (!strcmp(word,data[j])&amp;&amp;(c==0||c==2))
+        {
+          strcpy(ans,word);
+          c=1;
+        }
+        else if (wordl==datal[j]&amp;&amp;c!=1)
+        {
+          check=0;
+          for(k=0;k&lt; wordl;k++)
+          {
+            if (data[j][k]!=word[k]) check++;
+          }
+          if (check&lt;=1)
+          {
+            set[j]=1;
+            c=2;
+          }
+        }
+        else if (wordl-datal[j]==1&amp;&amp;c!=1)
+        {
+          check=0;
+          head=0;
+          for(k=0;k&lt; wordl-1;k++)
+          {
+            if (head==0&amp;&amp;word[k]!=data[j][k])
+            {
+              check++;
+              head++;
+            }
+            if (head&amp;&amp;word[k+1]!=data[j][k])
+            {
+              check++;
+            }
+          }
+          if (check&lt;=1)
+          {
+            set[j]=1;
+            c=2;
+          }
+        }    
+        else if (wordl-datal[j]==-1&amp;&amp;c!=1)
+        {
+          check=0;
+          head=0;
+          for(k=0;k&lt; wordl;k++)
+          {
+            if (head==0&amp;&amp;word[k]!=data[j][k])
+            {
+              check++;
+              head++;
+            }
+            if (head&amp;&amp;word[k]!=data[j][k+1])
+            {
+              check++;
+            }
+          }
+          if (check&lt;=1)
+          {
+            set[j]=1;
+            c=2;
+          }
+        }    
+      }
+      if (c==1)   printf("&gt;%s\n",ans);
+      else if (c==0) printf("!%s\n",word);
+      else if (c==2)
+      {
+        check=0;
+        printf("?");
+        for(j=0;j&lt; datan;j++)
+        {
+          if (set[j]==1)
+          {
+            if (check) printf(" ");
+            check++;
+            printf("%s",data[j]);
+          }
+        }
+        printf("\n");
+      }
+    }
+  }
+  return 0;
+}
+</pre></body></html>

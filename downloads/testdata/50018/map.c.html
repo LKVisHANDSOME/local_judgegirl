@@ -1,0 +1,72 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include "map.h"
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+
+void init(Map *map) {
+	map-&gt;sz = 0;
+}
+int map(Map *map, const int key, const char *value) {
+	for (int i = 0; i &lt; map-&gt;sz; i++) {
+		if (map-&gt;dat[i].key == key) {
+			strcpy(map-&gt;dat[i].val, value);
+			return 0;
+		}
+	}
+	int n = map-&gt;sz;
+	assert(n &lt; 1024);
+	map-&gt;dat[n].key = key;
+	strcpy(map-&gt;dat[n].val, value);
+	map-&gt;sz++;
+	return 1;
+}
+int numPairs(Map *map) {
+	return map-&gt;sz;
+}
+static int intcmp(const void *a, const void *b) {
+	return *(int *) a - *(int *) b;
+}
+static int paircmp(const void *a, const void *b) {
+	return intcmp(&amp;((*(MapPair**)a)-&gt;key), &amp;((*(MapPair**)b)-&gt;key));
+}
+void print(Map *map) {
+	static MapPair *A[1024];
+	for (int i = 0; i &lt; map-&gt;sz; i++)
+		A[i] = &amp;(map-&gt;dat[i]);
+	qsort(A, map-&gt;sz, sizeof(MapPair*), paircmp);
+	printf("----- map begin -----\n");
+	for (int i = 0; i &lt; map-&gt;sz; i++) {
+		printf("%d %s\n", A[i]-&gt;key, A[i]-&gt;val);
+	}
+	printf("----- end       -----\n");
+}
+const char *getValue(Map *map, const int key) {
+	for (int i = 0; i &lt; map-&gt;sz; i++) {
+		if (map-&gt;dat[i].key == key)
+			return map-&gt;dat[i].val;
+	}
+	return NULL;
+}
+int unmap(Map *map, int key) {
+	for (int i = 0; i &lt; map-&gt;sz; i++) {
+		if (map-&gt;dat[i].key == key) {
+			for (int j = i+1; j &lt; map-&gt;sz; j++)
+				map-&gt;dat[j-1] = map-&gt;dat[j];
+			map-&gt;sz--;
+			return 1;
+		}
+	}
+	return 0;
+}
+int reverseMap(Map *map, const char *value, int keys[]) {
+	int n = 0;
+	for (int i = 0; i &lt; map-&gt;sz; i++) {
+		if (!strcmp(map-&gt;dat[i].val, value))
+			keys[n++] = map-&gt;dat[i].key;
+	}
+	qsort(keys, n, sizeof(int), intcmp);
+	return n;
+}
+</pre></body></html>

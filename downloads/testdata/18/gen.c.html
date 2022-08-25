@@ -1,0 +1,16 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+    srand(time(NULL));
+    int r = 99, c = 99;
+    printf("%d %d\n", r, c);
+    for (int i=0 ; i&lt;r ; i++) {
+        for (int j=0 ; j&lt;c ; j++) {
+            if(j) printf(" ");
+            printf("%d", rand()%500+1);
+        }
+        printf("\n");
+    }
+    return 0;
+}</pre></body></html>

@@ -1,0 +1,93 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+
+void cformat(const char const *buf, int n, int A[]) {
+	// n variable separate by spaces
+    int c = 0, toks = 0;
+    char *ptr = strtok(buf, " \t\n\r");;
+    while (ptr) {
+        assert(sscanf(ptr, "%d", &amp;A[toks]) == 1);
+		toks++, ptr = strtok(NULL, " \t\n\r");
+        assert(toks &lt;= n);
+    }
+    assert(toks == n);
+}
+typedef struct activity {
+    int start;
+    int end;
+} Activity;
+
+int cmp(const void *x, const void *y) {
+	Activity *a = (Activity *) x;
+	Activity *b = (Activity *) y;
+	if (a-&gt;end &lt; b-&gt;end)
+		return -1;
+	if (a-&gt;end &gt; b-&gt;end)
+		return 1;
+	if (a-&gt;start &lt; b-&gt;start)
+		return -1;
+	if (a-&gt;start &gt; b-&gt;start)
+		return 1;
+	return 0;
+}
+
+Activity A[262144], B[262144];
+
+int main(int argc, char *argv[]) {
+    assert(argc &gt;= 4);
+    FILE *fin0 = fopen(argv[1], "r"),  // testdata in
+        *fin1 = fopen(argv[2], "r"),   // testdata out
+        *fin2 = fopen(argv[3], "r");   // 
+    int SPEC = strcmp(argv[4], "-DPRINT") == 0;
+    
+    int n, m, ret, test_ret;
+    char buf[1024];
+    while (fscanf(fin0, "%d", &amp;n) == 1) {
+    	for (int i = 0; i &lt; n; i++) {
+			int l, r;		
+    		fscanf(fin0, "%d %d", &amp;l, &amp;r);
+    		A[i].start = l, A[i].end = r;
+		}
+		fscanf(fin1, "%d", &amp;ret);
+		qsort(A, n, sizeof(Activity), cmp);
+		if (SPEC == 1) {
+			for (int i = 0; i &lt; ret; i++) {
+				fgets(buf, 1024, fin2);
+				int lr[1024];
+				cformat(buf, 2, lr);
+				B[i].start = lr[0], B[i].end = lr[1];
+				assert(lr[0] &lt;= lr[1]);
+			}
+			fgets(buf, 1024, fin2);
+			sscanf(buf, "%d", &amp;test_ret);
+			assert(test_ret == ret);
+			qsort(B, ret, sizeof(Activity), cmp);
+			
+			int it = 0, jt = 0;
+			while (it &lt; n &amp;&amp; jt &lt; ret) {
+				if (A[it].end &lt; B[jt].end) {
+					it++;
+				} else if (A[it].start &lt; B[jt].start) {
+					it++;
+				} else if (A[it].start == B[jt].start &amp;&amp; 
+					A[it].end == B[jt].end) {
+					it++, jt++;
+				} else {
+					assert(0);
+				}
+			}
+			assert(jt == ret);
+			for (int i = 1; i &lt; ret; i++)
+				assert(B[i-1].end &lt;= B[i].start);
+		} else {
+			int test_ret;
+			fscanf(fin2, "%d", &amp;test_ret);
+			assert(test_ret == ret);
+		}
+	}
+    return 0;
+}
+</pre></body></html>

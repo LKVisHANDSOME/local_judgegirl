@@ -1,0 +1,13 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">N = 2 F = 2 ONE = 1 TWO = 2 R = 0 S = 0 ZERO = 0 HUNDRED = 100 END
+IF N &gt; HUNDRED GOTO 11
+F = TWO + ZERO
+R = N % F
+IF R == ZERO GOTO 9
+F = F + ONE
+S = F * F
+IF S &lt;= N GOTO 3
+PRINT N
+N = N + ONE
+GOTO 1
+STOP
+</pre></body></html>

@@ -1,0 +1,194 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">50010. Word Editor</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=50010.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/50010.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/50010.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Problem description</h2><p>Write a program to edit a word. First you will be given a word consisting of lower letters. Each line afterward is a command. The commands are as follow.</p>
+<ul>
+<li class="has-jax has-jax has-jax has-jax"><code>replace x y</code><br/>Both <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-1-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" role="math" style="width: 0.609em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.562em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.52em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">x</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script id="MathJax-Element-1" type="math/tex">x</script> and <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-2-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" role="math" style="width: 0.562em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.516em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.52em, 2.476em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-5"><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math-italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.238em; border-left: 0px solid; width: 0px; height: 0.772em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>y</mi></math></span></span><script id="MathJax-Element-2" type="math/tex">y</script> are character. You need to replace all occurrence of <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-3-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-7" role="math" style="width: 0.609em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.562em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.52em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-8"><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math-italic;">x</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script id="MathJax-Element-3" type="math/tex">x</script> by <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-4-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-10" role="math" style="width: 0.562em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.516em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.52em, 2.476em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-11"><span class="mi" id="MathJax-Span-12" style="font-family: MathJax_Math-italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.238em; border-left: 0px solid; width: 0px; height: 0.772em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>y</mi></math></span></span><script id="MathJax-Element-4" type="math/tex">y</script>.</li>
+<li class="has-jax"><code>remove x</code><br/>Remove all occurrence of <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-5-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-13" role="math" style="width: 0.609em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.562em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.52em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-14"><span class="mi" id="MathJax-Span-15" style="font-family: MathJax_Math-italic;">x</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script id="MathJax-Element-5" type="math/tex">x</script>.</li>
+<li class="has-jax"><code>addhead x</code><br/>Add a character <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-6-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-16" role="math" style="width: 0.609em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.562em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.52em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-17"><span class="mi" id="MathJax-Span-18" style="font-family: MathJax_Math-italic;">x</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script id="MathJax-Element-6" type="math/tex">x</script> at the beginning of the word.</li>
+<li class="has-jax"><code>addtail x</code><br/>Add a character <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-7-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-19" role="math" style="width: 0.609em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.562em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.52em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-20"><span class="mi" id="MathJax-Span-21" style="font-family: MathJax_Math-italic;">x</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span></span><script id="MathJax-Element-7" type="math/tex">x</script> at the end of the word.</li>
+<li><code>end</code><br/>Stop the computation. It is guarantee the last command is always an end.</li>
+</ul>
+<p>For example, if you are given a word <code>"pangfeng"</code>, then after <code>"replace g d"</code> you will have <code>"pandfend"</code>. Then after <code>"remove n"</code> you will have <code>"padfed"</code>. After <code>"addhead a"</code> you will have <code>"apadfed"</code>. After <code>"addtail s"</code> you will have <code>"apadfeds"</code>.</p>
+<h3 class="content-subhead">Subtask</h3><ul>
+<li>10pt. Implement replace and end. The input is always correct.</li>
+<li>20pt. Implement the replace, remove, and end. The input is always correct.</li>
+<li>30pt. Implement the replace, remove, addtail, and end. The input is always correct.</li>
+<li>30pt. Implement all commands. The input is always correct.</li>
+<li>10pt. Implement all commands. The input command maybe incorrect. If you encounter an invalid command <code>"xyz"</code>, output <code>"invalid command xyz"</code> and stop the program immediately.</li>
+</ul>
+<h2 class="content-subhead">Input Format</h2><p class="has-jax">It has a testdata set. First line contains a string <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-8-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-22" role="math" style="width: 0.702em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.656em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1000.66em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-23"><span class="mi" id="MathJax-Span-24" style="font-family: MathJax_Math-italic;">S<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.049em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.868em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi></math></span></span><script id="MathJax-Element-8" type="math/tex">S</script>, then following many commands to edit the word.</p>
+<ul>
+<li class="has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mo fence="false" stretchy="false"&gt;|&lt;/mo&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mo fence="false" stretchy="false"&gt;|&lt;/mo&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;100000&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-9-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-25" role="math" style="width: 5.744em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.557em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.263em, 1005.51em, 2.523em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-26"><span class="mo" id="MathJax-Span-27" style="font-family: MathJax_Main;">|</span><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math-italic;">S<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.049em;"></span></span><span class="mo" id="MathJax-Span-29" style="font-family: MathJax_Main;">|</span><span class="mo" id="MathJax-Span-30" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mn" id="MathJax-Span-31" style="font-family: MathJax_Main; padding-left: 0.282em;">100000</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.286em; border-left: 0px solid; width: 0px; height: 1.108em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo fence="false" stretchy="false">|</mo><mi>S</mi><mo fence="false" stretchy="false">|</mo><mo>≤</mo><mn>100000</mn></math></span></span><script id="MathJax-Element-9" type="math/tex">\vert S\vert  \le 100000</script></li>
+<li class="has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mo fence="false" stretchy="false"&gt;|&lt;/mo&gt;&lt;mtext&gt;#valid command&lt;/mtext&gt;&lt;mo fence="false" stretchy="false"&gt;|&lt;/mo&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;100000&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-10-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-32" role="math" style="width: 12.698em; display: inline-block;"><span style="display: inline-block; position: relative; width: 12.325em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.263em, 1012.28em, 2.523em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-33"><span class="mo" id="MathJax-Span-34" style="font-family: MathJax_Main;">|</span><span class="mtext" id="MathJax-Span-35" style="font-family: MathJax_Main;">#valid command</span><span class="mo" id="MathJax-Span-36" style="font-family: MathJax_Main;">|</span><span class="mo" id="MathJax-Span-37" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mn" id="MathJax-Span-38" style="font-family: MathJax_Main; padding-left: 0.282em;">100000</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.286em; border-left: 0px solid; width: 0px; height: 1.108em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo fence="false" stretchy="false">|</mo><mtext>#valid command</mtext><mo fence="false" stretchy="false">|</mo><mo>≤</mo><mn>100000</mn></math></span></span><script id="MathJax-Element-10" type="math/tex">\vert \text{#valid command}\vert  \le 100000</script></li>
+<li class="has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mo fence="false" stretchy="false"&gt;|&lt;/mo&gt;&lt;mtext&gt;invalid command&lt;/mtext&gt;&lt;mo fence="false" stretchy="false"&gt;|&lt;/mo&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;20&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-11-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-39" role="math" style="width: 10.691em; display: inline-block;"><span style="display: inline-block; position: relative; width: 10.365em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.263em, 1010.32em, 2.523em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-40"><span class="mo" id="MathJax-Span-41" style="font-family: MathJax_Main;">|</span><span class="mtext" id="MathJax-Span-42" style="font-family: MathJax_Main;">invalid command</span><span class="mo" id="MathJax-Span-43" style="font-family: MathJax_Main;">|</span><span class="mo" id="MathJax-Span-44" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mn" id="MathJax-Span-45" style="font-family: MathJax_Main; padding-left: 0.282em;">20</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.286em; border-left: 0px solid; width: 0px; height: 1.108em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo fence="false" stretchy="false">|</mo><mtext>invalid command</mtext><mo fence="false" stretchy="false">|</mo><mo>≤</mo><mn>20</mn></math></span></span><script id="MathJax-Element-11" type="math/tex">\vert \text{invalid command}\vert  \le 20</script></li>
+</ul>
+<h2 class="content-subhead">Sample Input 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_295896"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">pangfeng</code></div><div class="line number2 index1 alt1"><code class="plain">replace g d</code></div><div class="line number3 index2 alt2"><code class="plain">end</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_90468"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">pandfend</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input 2</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_322975"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">pangfeng</code></div><div class="line number2 index1 alt1"><code class="plain">replace g d</code></div><div class="line number3 index2 alt2"><code class="functions bold">remove</code> <code class="plain">n</code></div><div class="line number4 index3 alt1"><code class="plain">end</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 2</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_803239"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">padfed</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input 3</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_627691"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">pangfeng</code></div><div class="line number2 index1 alt1"><code class="plain">replace g d</code></div><div class="line number3 index2 alt2"><code class="functions bold">remove</code> <code class="plain">n</code></div><div class="line number4 index3 alt1"><code class="plain">addhead a</code></div><div class="line number5 index4 alt2"><code class="plain">addtail s</code></div><div class="line number6 index5 alt1"><code class="plain">end</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 3</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_376402"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">apadfeds</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input 3</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_115326"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">pangfeng</code></div><div class="line number2 index1 alt1"><code class="plain">replace g d</code></div><div class="line number3 index2 alt2"><code class="functions bold">remove</code> <code class="plain">n</code></div><div class="line number4 index3 alt1"><code class="plain">addhead a</code></div><div class="line number5 index4 alt2"><code class="plain">addtail s</code></div><div class="line number6 index5 alt1"><code class="plain">addpangfeng b</code></div><div class="line number7 index6 alt2"><code class="plain">addhead a</code></div><div class="line number8 index7 alt1"><code class="plain">end</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 3</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_316247"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">invalid command addpangfeng</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">建議</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_779194"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="comments">//</code></div><div class="line number2 index1 alt1"><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%s"</code><code class="plain">, S); 取代 </code><code class="functions bold">gets</code><code class="plain">() / </code><code class="functions bold">fgets</code><code class="plain">()</code></div><div class="line number3 index2 alt2"><code class="comments">//</code></div><div class="line number4 index3 alt1"><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%s %s %s"</code><code class="plain">, cmd, sx, sy), cx = sx[0], cy = sy[0]; 取代 </code><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%s %c %c"</code><code class="plain">, cmd, &amp;cx, &amp;cy);</code></div><div class="line number5 index4 alt2"><code class="comments">// </code></div><div class="line number6 index5 alt1"><code class="color1 bold">int</code> <code class="plain">n = </code><code class="functions bold">strlen</code><code class="plain">(s);</code></div><div class="line number7 index6 alt2"><code class="keyword bold">for</code> <code class="plain">(</code><code class="color1 bold">int</code> <code class="plain">i = 0; i &lt; n; i++) {</code></div><div class="line number8 index7 alt1"><code class="plain">}</code></div><div class="line number9 index8 alt2"><code class="comments">// TLE，不要用以下這種寫法。</code></div><div class="line number10 index9 alt1"><code class="keyword bold">for</code> <code class="plain">(</code><code class="color1 bold">int</code> <code class="plain">i = 0; i &lt; </code><code class="functions bold">strlen</code><code class="plain">(s); i++) {</code></div><div class="line number11 index10 alt2"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/50010.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/0.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (0%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (10%): 10.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50010/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app2663" name="dsq-app2663" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50010&amp;t_d=50010.%20Word%20Editor%20%7C%20Judge%20Girl&amp;t_t=50010.%20Word%20Editor%20%7C%20Judge%20Girl#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app8392" name="dsq-app8392" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50010&amp;t_d=50010.%20Word%20Editor%20%7C%20Judge%20Girl&amp;t_t=50010.%20Word%20Editor%20%7C%20Judge%20Girl&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 395px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

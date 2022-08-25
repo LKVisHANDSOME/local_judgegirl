@@ -1,0 +1,17 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include "findLength.h"
+#define MAXN 256
+int array[MAXN][MAXN];
+
+int main() {
+	int N, r, c;
+	int direction[4][2] = {{1,0},{1,1},{0,1},{-1,1}};
+	scanf("%d", &amp;N);
+	for (int i = 0; i &lt; N; i++)
+			for (int j = 0; j &lt; N; j++)
+					scanf("%d", &amp;array[i][j]);
+	scanf("%d%d", &amp;r, &amp;c);
+	for (int i = 0; i &lt; 4; i++)
+			printf("%d\n", findLength(array, N, r, c, direction[i][0], direction[i][1]));
+}
+</pre></body></html>

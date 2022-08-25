@@ -1,0 +1,94 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+
+void seesaw_format(char buf[], int N, int B[]) {
+	char *p = strtok(buf, " \n\t\r");
+	int n = 0;
+	while (p != NULL) {
+		assert(n &lt; N);
+		if (n == N/2) {
+			assert(strcmp("_^_", p) == 0);
+		} else {
+			sscanf(p, "%d", &amp;B[n]);
+		}
+		n++;
+		p = strtok(NULL, " \n\t\r");
+	}
+}
+int cmp(const void *a, const void *b) {
+	int x = *(int *) a;
+	int y = *(int *) b;
+	if (x &lt; y)	return -1;
+	if (x &gt; y)	return 1;
+	return 0;
+}
+void set_contain(int A[], int an, int C[], int cn) {
+	int i = 0, j = 0;
+	while (i &lt; an &amp;&amp; j &lt; cn) {
+		if (A[i] == C[j]) {
+			i++, j++;
+		} else if (A[i] &lt; C[j]) {
+			i++;
+		} else {
+			assert(0);
+		}
+	}
+	assert(j == cn);
+}
+void balance(int B[], int N) {
+	int lw = 0, rw = 0;
+	for (int i = N/2-1, x = 1; i &gt;= 0; i--, x++)
+		lw += B[i] * x;
+	for (int i = N/2+1, x = 1; i &lt; N; i++, x++)
+		rw += B[i] * x;
+	assert(lw == rw);
+}
+void nosolution(char buf[]) {
+	char *p = strtok(buf, " \n\t\r");
+	int n = 0;
+	while (p != NULL) {
+		assert(n &lt; 1);
+		assert(strcmp("N", p) == 0);
+		n++;
+		p = strtok(NULL, " \n\t\r");
+	}
+	assert(n == 1);
+}
+int main(int argc, char *argv[]) {
+    assert(argc &gt;= 4);
+    FILE *fin0 = fopen(argv[1], "r"),  // testdata in
+        *fin1 = fopen(argv[2], "r"),   // testdata out
+        *fin2 = fopen(argv[3], "r");   // 
+#define MAXN 128
+	int N;
+    char buf[65536];
+    char g[32][32];
+    while (fscanf(fin0, "%d", &amp;N) == 1) {
+    	int A[1024], B[1024], C[1024];
+    	for (int i = 0; i &lt; N; i++)
+    		fscanf(fin0, "%d", &amp;A[i]);
+    	fscanf(fin1, "%s", buf);
+    	int solvable = !strcmp("Y", buf);
+    	if (solvable) {
+	    	fgets(buf, 65536, fin2);
+	    	seesaw_format(buf, N, B);
+	    	int m = 0;
+	    	for (int i = 0; i &lt; N/2; i++)
+	    		C[m++] = B[i];
+	    	for (int i = N/2+1; i &lt; N; i++)
+	    		C[m++] = B[i];
+	    	qsort(A, N, sizeof(int), cmp);
+	    	qsort(C, N-1, sizeof(int), cmp);
+	    	set_contain(A, N, C, N-1);
+	    	balance(B, N);
+    	} else {
+    		fgets(buf, 65536, fin2);
+    		nosolution(buf);
+		}
+	}
+    return 0;
+}
+</pre></body></html>

@@ -1,0 +1,23 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include "constructPointerArray.h"
+int A[MAXN][MAXN];
+const int *B[MAXN][MAXN];
+int main()
+{
+    int N;
+    scanf("%d", &amp;N);
+    for (int i = 0; i &lt; N; i++) {
+        for (int j = 0; j &lt; N; j++) {
+            scanf("%d", &amp;A[i][j]);
+	}
+    }
+    constructPointerArray(A, B, N);
+    for (int i = 0; i &lt; N; i++) {
+        for (int j = 0; j &lt; N; j++) {
+            printf("%d%c", *B[i][j], j == N - 1 ? '\n' : ' ');
+	}
+    }
+    return 0;
+}
+
+</pre></body></html>

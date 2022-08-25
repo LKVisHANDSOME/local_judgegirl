@@ -1,0 +1,17 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include "set.h"
+
+int main(){
+	Set s1, s2;
+	int numberOfElemnet = 5;
+	initializeSet(&amp;s1, numberOfElemnet);
+	initializeSet(&amp;s2, numberOfElemnet);
+	
+	addElement(&amp;s1, 1);
+	addElement(&amp;s1, 3);
+	addElement(&amp;s2, 1);
+	addElement(&amp;s2, 5);
+	
+	if(intersect(s1, s2)) 
+		printf("intersect!\n");
+}</pre></body></html>

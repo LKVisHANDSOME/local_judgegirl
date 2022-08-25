@@ -1,0 +1,74 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+int n, arr[26]={0}, book[26][26]={{0}}, ans[40], count[26]={0};
+
+void sort(int k, int len)
+{
+  if (k==len)
+  {
+    for (int i=0; i&lt;len; i++)
+      printf("%c", (char)(ans[i]+'a'));
+    printf("\n");
+    return;
+  }
+
+
+  for (int i=0; i&lt;26; i++)
+  {
+
+    if (arr[i]&gt;0)
+    {
+      int flag = 0;
+      if (k&gt;0)
+        for (int j=0; j&lt;count[ans[k-1]]; j++)
+          if (book[ans[k-1]][j]==i)
+          {
+            flag = 1;
+            break;
+          }
+      if (!flag)
+      {
+        ans[k] = i;
+        arr[i]--;
+        sort(k+1, len);
+        arr[i]++;
+      }
+
+    }
+  }
+  return;
+}
+
+int main(void)
+{
+  char temp1[40],tmp1,tmp2, tmp3;
+  int len, c1, c2;
+  gets(temp1);
+  len = strlen(temp1);
+  for (int i=0; i&lt;len; i++)
+  {
+      if( temp1[i] == '\r' ){
+        printf("XX\n");
+      }
+      int k=temp1[i]-'a';
+      arr[k]++;
+  }
+  scanf("%d", &amp;n);
+  for (int i=0; i&lt;n; i++)
+  {
+    scanf("%c%c%c", &amp;tmp1, &amp;tmp2, &amp;tmp3);
+    c1=tmp2-'a';
+    c2=tmp3-'a';
+    book[c1][count[c1]] = c2;
+    count[c1]++;
+  }
+
+  sort(0, len);
+  //printf("%d %d\n",c1, c2);
+  //for (int i=0; i&lt;26; i++) 
+  //printf("%d ", arr[i]);
+  return 0;
+}
+
+</pre></body></html>

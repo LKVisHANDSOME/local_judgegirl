@@ -1,0 +1,198 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">50. Overlap Area</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=50.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/50.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/50.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Task Description</h2><p>Given three rectangles whose sides are parallel to either <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-1"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-2">x</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-1-Frame" tabindex="0"></span><script id="MathJax-Element-1" type="math/tex">x</script>-axis or <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-3"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-4">y</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-2-Frame" tabindex="0"></span><script id="MathJax-Element-2" type="math/tex">y</script>-axis, please compute the area of the shape that is covered by at least one of these three rectangles. The three rectangles can overlap in any way you can imagine, however, this is as the same as computing the <strong>union</strong> of three sets.</p>
+<p>給予 3 個平行兩座標軸的矩形，請計算至少被其中一個矩形覆蓋的面積，相當於計算聯集後的面積。</p>
+<h2 class="content-subhead">Input Format</h2><p>There are 3 lines in the input data. In each line there are 4 integers <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-5"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-6">l</span><span class="MJXp-mo" id="MJXp-Span-7" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mspace" id="MJXp-Span-8" style="width: 0.278em; height: 0em;"></span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-9">b</span><span class="MJXp-mo" id="MJXp-Span-10" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mspace" id="MJXp-Span-11" style="width: 0.278em; height: 0em;"></span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-12">r</span><span class="MJXp-mo" id="MJXp-Span-13" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mspace" id="MJXp-Span-14" style="width: 0.278em; height: 0em;"></span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-15">t</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-3-Frame" tabindex="0"></span><script id="MathJax-Element-3" type="math/tex">l, \; b, \; r, \; t</script> representing a rectangle, where <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-16"><span class="MJXp-mo" id="MJXp-Span-17" style="margin-left: 0em; margin-right: 0em;">(</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-18">l</span><span class="MJXp-mo" id="MJXp-Span-19" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-20">b</span><span class="MJXp-mo" id="MJXp-Span-21" style="margin-left: 0em; margin-right: 0em;">)</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-4-Frame" tabindex="0"></span><script id="MathJax-Element-4" type="math/tex">(l, b)</script> is the coordinate of the bottom-left vertex, and <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-22"><span class="MJXp-mo" id="MJXp-Span-23" style="margin-left: 0em; margin-right: 0em;">(</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-24">r</span><span class="MJXp-mo" id="MJXp-Span-25" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-26">t</span><span class="MJXp-mo" id="MJXp-Span-27" style="margin-left: 0em; margin-right: 0em;">)</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-5-Frame" tabindex="0"></span><script id="MathJax-Element-5" type="math/tex">(r, t)</script> is the coordinate of the top-right vertex. The width and height of each rectangle are between <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-28"><span class="MJXp-mn" id="MJXp-Span-29">1</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-6-Frame" tabindex="0"></span><script id="MathJax-Element-6" type="math/tex">1</script> and <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-30"><span class="MJXp-mn" id="MJXp-Span-31">20000</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-7-Frame" tabindex="0"></span><script id="MathJax-Element-7" type="math/tex">20000</script> respectively.</p>
+<p>輸入只有 3 行，每一行上會有 4 個整數，分別表示左下角和右上角座標，保證每個矩形的長寬介於 1 到 20000 之間。</p>
+<h2 class="content-subhead">Output Format</h2><p>You should output the area specified above in a single line.</p>
+<p>輸出一行一個整數。</p>
+<h2 class="content-subhead">Sample Input 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_541497"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0 2 3 5</code></div><div class="line number2 index1 alt1"><code class="plain">1 0 4 3</code></div><div class="line number3 index2 alt2"><code class="plain">2 1 5 4</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_290691"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">20</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input 2</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_658922"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">1 0 3 2</code></div><div class="line number2 index1 alt1"><code class="plain">2 3 4 5</code></div><div class="line number3 index2 alt2"><code class="plain">0 1 5 4</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Sample Output 2</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_334406"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">19</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Hint</h3><p>Denote the cardinality of set <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-32"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-33">A</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-8-Frame" tabindex="0"></span><script id="MathJax-Element-8" type="math/tex">A</script> as <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-34"><span class="MJXp-mo" id="MJXp-Span-35" style="margin-left: 0em; margin-right: 0em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-36">A</span><span class="MJXp-mo" id="MJXp-Span-37" style="margin-left: 0em; margin-right: 0em;">|</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-9-Frame" tabindex="0"></span><script id="MathJax-Element-9" type="math/tex">\vert A\vert </script>, the union of sets <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-38"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-39">A</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-10-Frame" tabindex="0"></span><script id="MathJax-Element-10" type="math/tex">A</script> and <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-40"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-41">B</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-11-Frame" tabindex="0"></span><script id="MathJax-Element-11" type="math/tex">B</script> as <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-42"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-43">A</span><span class="MJXp-mo" id="MJXp-Span-44" style="margin-left: 0.267em; margin-right: 0.267em;">+</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-45">B</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-12-Frame" tabindex="0"></span><script id="MathJax-Element-12" type="math/tex">A+B</script>, and the intersection of sets <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-46"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-47">A</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-13-Frame" tabindex="0"></span><script id="MathJax-Element-13" type="math/tex">A</script> and <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-48"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-49">B</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-14-Frame" tabindex="0"></span><script id="MathJax-Element-14" type="math/tex">B</script> as <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-50"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-51">A</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-52">B</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-15-Frame" tabindex="0"></span><script id="MathJax-Element-15" type="math/tex">AB</script>, we have <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-53"><span class="MJXp-mo" id="MJXp-Span-54" style="margin-left: 0em; margin-right: 0em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-55">A</span><span class="MJXp-mo" id="MJXp-Span-56" style="margin-left: 0.267em; margin-right: 0.267em;">+</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-57">B</span><span class="MJXp-mo" id="MJXp-Span-58" style="margin-left: 0.267em; margin-right: 0.267em;">+</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-59">C</span><span class="MJXp-mo" id="MJXp-Span-60" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mo" id="MJXp-Span-61" style="margin-left: 0.333em; margin-right: 0.333em;">=</span><span class="MJXp-mo" id="MJXp-Span-62" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-63">A</span><span class="MJXp-mo" id="MJXp-Span-64" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mo" id="MJXp-Span-65" style="margin-left: 0.267em; margin-right: 0.267em;">+</span><span class="MJXp-mo" id="MJXp-Span-66" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-67">B</span><span class="MJXp-mo" id="MJXp-Span-68" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mo" id="MJXp-Span-69" style="margin-left: 0.267em; margin-right: 0.267em;">+</span><span class="MJXp-mo" id="MJXp-Span-70" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-71">C</span><span class="MJXp-mo" id="MJXp-Span-72" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mo" id="MJXp-Span-73" style="margin-left: 0.267em; margin-right: 0.267em;">−</span><span class="MJXp-mo" id="MJXp-Span-74" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-75">A</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-76">B</span><span class="MJXp-mo" id="MJXp-Span-77" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mo" id="MJXp-Span-78" style="margin-left: 0.267em; margin-right: 0.267em;">−</span><span class="MJXp-mo" id="MJXp-Span-79" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-80">A</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-81">C</span><span class="MJXp-mo" id="MJXp-Span-82" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mo" id="MJXp-Span-83" style="margin-left: 0.267em; margin-right: 0.267em;">−</span><span class="MJXp-mo" id="MJXp-Span-84" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-85">B</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-86">C</span><span class="MJXp-mo" id="MJXp-Span-87" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mo" id="MJXp-Span-88" style="margin-left: 0.267em; margin-right: 0.267em;">+</span><span class="MJXp-mo" id="MJXp-Span-89" style="margin-left: 0.167em; margin-right: 0.167em;">|</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-90">A</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-91">B</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-92">C</span><span class="MJXp-mo" id="MJXp-Span-93" style="margin-left: 0em; margin-right: 0em;">|</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-16-Frame" tabindex="0"></span><script id="MathJax-Element-16" type="math/tex">\vert A+B+C\vert  = \vert A\vert  + \vert B\vert  + \vert C\vert  - \vert AB\vert  - \vert AC\vert  - \vert BC\vert  + \vert ABC\vert </script>.</p>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/50.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/0.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (0%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (6%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (6%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (6%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (6%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (6%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/11.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 11 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/12.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 12 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/13.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 13 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/14.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 14 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50/15.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 15 (7%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app8148" name="dsq-app8148" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50&amp;t_d=50.%20Overlap%20Area%20%7C%20Judge%20Girl&amp;t_t=50.%20Overlap%20Area%20%7C%20Judge%20Girl#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app7052" name="dsq-app7052" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50&amp;t_d=50.%20Overlap%20Area%20%7C%20Judge%20Girl&amp;t_t=50.%20Overlap%20Area%20%7C%20Judge%20Girl&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

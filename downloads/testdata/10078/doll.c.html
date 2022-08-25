@@ -1,0 +1,38 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include "doll.h"
+
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+Doll *newDoll(char top, char bottom) {
+	Doll *d = (Doll*) malloc(sizeof(Doll));
+	d-&gt;top = top, d-&gt;bottom = bottom, d-&gt;interior = NULL;
+	return d;
+}
+void package(Doll *outer, Doll *inter) {
+	outer-&gt;interior = inter;
+}
+static void rprint(char *buf, int *idx, Doll *d) {
+	if (d == NULL)
+		return ;
+	buf[*idx] = d-&gt;top, (*idx)++;
+	rprint(buf, idx, d-&gt;interior);
+	buf[*idx] = d-&gt;bottom, (*idx)++;
+}
+const char* doll_c_str(Doll *doll) {
+	static char *buf = NULL;
+	static int bufsz = 0;
+	
+	int cnt = 0, idx = 0;
+	Doll *d = doll;
+	while (d != NULL)
+		d = d-&gt;interior, cnt++;
+	if (bufsz &lt; cnt*2) {
+		free(buf);
+		buf = (char *) malloc(sizeof(char) * (cnt*2+1));
+		bufsz = cnt*2+1;
+	}
+	rprint(buf, &amp;idx, doll);
+	buf[idx] = '\0';
+	return buf;
+}
+</pre></body></html>

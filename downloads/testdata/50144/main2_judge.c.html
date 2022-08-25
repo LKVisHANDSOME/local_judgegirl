@@ -1,0 +1,64 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include "tree.h"
+void preorder(Node *root) {
+    if (root == NULL)
+        return ;
+    printf("%d ", root-&gt;data);
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+void inorder(Node *root) {
+    if (root == NULL)
+        return ;
+    inorder(root-&gt;left);
+    printf("%d ", root-&gt;data);
+    inorder(root-&gt;right);
+}
+Node *TA_newNode() {
+    Node *node = (Node *)malloc(sizeof(Node));
+    node-&gt;data = 0;
+    node-&gt;left = NULL;
+    node-&gt;right = NULL;
+    return node;
+}
+Node *TA_construct(Node *root, char instruction[MAXN]) {
+    if (root == NULL)
+        root = TA_newNode();
+    root-&gt;data++;
+    Node *current = root;
+    int len = strlen(instruction);
+    for (int i = 0; i &lt; len; i++) {
+        if (instruction[i] == 'L') {
+            if (current-&gt;left == NULL)
+                current-&gt;left = TA_newNode();
+            current = current-&gt;left;
+            current-&gt;data++;
+        }
+        if (instruction[i] == 'R') {
+            if (current-&gt;right == NULL)
+                current-&gt;right = TA_newNode();
+            current = current-&gt;right;
+            current-&gt;data++;
+        }
+    }
+    return root;
+}
+int main()
+{
+    char instruction[MAXN];
+    Node *root = NULL;
+    int n;
+    scanf("%d", &amp;n);
+    for (int i = 0; i &lt; n; i++) {
+        scanf("%s", instruction);
+        root = TA_construct(root, instruction);
+    }
+    while (scanf("%s", instruction) != EOF) {
+        printf("%d\n", query(root, instruction));
+    }
+    return 0;
+}
+
+</pre></body></html>

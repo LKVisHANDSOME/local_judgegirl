@@ -1,0 +1,33 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#include &lt;stdbool.h&gt;
+typedef double Float;
+
+bool Quadratic(Float A, Float B, Float C, 
+					Float *t0, Float *t1) {
+	Float discrim = B*B - 4.f*A*C;
+	if (discrim &lt; 0.)	return false;
+	Float rootDiscrim = sqrt(discrim), q;
+	if (B &lt; 0)	q = -.5f*(B - rootDiscrim);
+	else		q = -.5f*(B + rootDiscrim);
+	*t0 = q / A;
+	*t1 = C / q;
+	if (*t0 &gt; *t1) {
+		Float t;
+		t = *t0, *t0 = *t1, *t1 = t;
+	}
+	return true;
+}
+int main() {
+	Float a, b, c;
+	while (scanf("%lf %lf %lf", &amp;a, &amp;b, &amp;c) == 3) {
+		Float t0, t1;
+		bool f = Quadratic(a, b, c, &amp;t0, &amp;t1);
+		long long tmp = *((long long*)&amp;t0);
+		printf("%.20f %.20lf\n", t0, t1);
+	}
+	return 0;
+}
+/*
+*/
+</pre></body></html>

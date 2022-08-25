@@ -1,0 +1,33 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(){
+	int a, b, c, d, e, p, q, r, s, x, y, F;
+	scanf("%d %d %d %d %d", &amp;a, &amp;b, &amp;c, &amp;d, &amp;e);
+	scanf("%d %d %d %d", &amp;p, &amp;q, &amp;r, &amp;s);
+	scanf("%d %d %d", &amp;x, &amp;y, &amp;F);
+	int res=abs(c*x+d*y)%e;
+	while(F--){
+		int dir = abs(a*x+b*y)%4;
+		if(dir==0) {
+			y += 1;
+		} else if (dir==1) {
+			x += 1;
+		} else if (dir==2) {
+			y -= 1;
+		} else {
+			x -= 1;
+		}
+		if (x==p &amp;&amp; y==q) {
+			x=r; y=s;
+		} else if (x==r &amp;&amp; y==s) {
+			x=p; y=q;
+		} else {
+			res += abs(c*x + d*y) % e;
+		}
+	}
+	printf("%d\n", res);
+	printf("%d %d\n", x, y);
+	return 0;
+}
+</pre></body></html>

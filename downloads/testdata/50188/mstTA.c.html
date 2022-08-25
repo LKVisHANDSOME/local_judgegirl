@@ -1,0 +1,42 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdbool.h&gt;
+#include "mstTA.h"
+
+void initTA(MSTTA *mst, int N) {
+  mst-&gt;N = N;
+  memset(mst-&gt;adj, 0, sizeof(int) * MAXNUMOFCITY * MAXNUMOFCITY);
+}
+
+void addRoadTA(MSTTA *mst, int city1, int city2, int len) {
+  mst-&gt;adj[city1][city2] = mst-&gt;adj[city2][city1] = len;
+}
+
+int removeRoadTA(MSTTA *mst, int city1, int city2) {
+	int res = mst-&gt;adj[city1][city2];
+  mst-&gt;adj[city1][city2] = mst-&gt;adj[city2][city1] = 0;
+	return res;
+}
+
+void visit(MSTTA *mst, int *visited, int cur) {
+  visited[cur] = 1;
+  for(int city1 = 0; city1 &lt; mst-&gt;N; city1++)
+    if(mst-&gt;adj[cur][city1] &amp;&amp; !visited[city1])
+      visit(mst, visited, city1);
+}
+
+bool hasPathTA(MSTTA *mst, int i, int city2) {
+  int visited[MAXNUMOFCITY] = {0};
+  visit(mst, visited, i);
+  return visited[city2];
+}
+
+bool connectedTA(MSTTA *mst) {
+  int visited[MAXNUMOFCITY] = {0};
+  visit(mst, visited, 0);
+  int isConnected = 1;
+  for(int i = 0; i &lt; mst-&gt;N; i++)
+    isConnected &amp;= visited[i];
+  return isConnected;
+}
+</pre></body></html>

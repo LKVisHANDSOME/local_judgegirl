@@ -1,0 +1,36 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+int array[1024][1024];
+int main(){
+	int N = 1024;
+	printf("%d\n", N);
+	int count = 0;
+	for (int i = 0; i &lt; N; i++) {
+		for (int j = 0; j &lt; N; j++) {
+			array[i][j] = count;
+			count++;
+		}
+	}
+	srand(time(NULL));
+	for (int i = 0; i &lt; N; i++) {
+		for (int j = 0; j &lt; N; j++) {
+			int ran1 = rand() % N;
+			int ran2 = rand() % N;
+			int temp = array[i][j];
+			array[i][j] = array[ran1][ran2];
+			array[ran1][ran2] = temp;
+		}
+	}
+	for (int i = 0; i &lt; N; i++) {
+		for (int j = 0; j &lt; N; j++) {
+			if (j != N - 1)
+				printf("%d ", array[i][j]);
+			else
+				printf("%d", array[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+</pre></body></html>

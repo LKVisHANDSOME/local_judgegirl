@@ -1,0 +1,172 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">65. Expression Tree</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=65.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/65.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/65.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Problem Description</h2><p>Write a program to compute an expression using a tree. Consider the expression <code>4 + x * 7</code>. We will use the following recursive definition to express this expression tree.</p>
+<ul>
+<li>A positive integer or a variable is an expression tree.</li>
+<li><code>( operator left-tree right-tree )</code> is also an expression tree if operator is one of the <code>'+'</code>, <code>'-'</code>, <code>'*'</code>, or <code>'/'</code>, and both left-tree and right-tree are expression trees.</li>
+</ul>
+<p>Following this definition, we can use <code>( + 4 ( * x 7 ) )</code> to denote the previous expression. Now given an expression tree and the values of all variables, compute the value of this expression.</p>
+<h2 class="content-subhead">Input</h2><p class="has-jax has-jax has-jax">The first line of the input is the expression tree, which is less than 1000 characters. Note that every two adjacent elements of an expression tree are separated by a space. The name of the variables are <strong>valid C variable names</strong>, with no more than 32 characters. The next <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-1-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-1" type="math/tex">n</script> lines (<span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;50&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-2-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" role="math" style="width: 3.036em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.943em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.356em, 1002.9em, 2.43em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-5"><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math-italic;">n</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.282em;">50</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.19em; border-left: 0px solid; width: 0px; height: 0.916em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>≤</mo><mn>50</mn></math></span></span><script id="MathJax-Element-2" type="math/tex">n \le 50</script>), where <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-3-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-10"><span class="mi" id="MathJax-Span-11" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-3" type="math/tex">n</script> is the number of variables in the expression tree, indicates the value of the variable, in a form as <code>variable = v</code>, also separated by a space.</p>
+<h2 class="content-subhead">Output</h2><p>The output is the value of the expression tree.</p>
+<h2 class="content-subhead">Sample input</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_720505"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">( + 4 ( * x 7 ) )</code></div><div class="line number2 index1 alt1"><code class="plain">x = 5</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample output</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_36605"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">39</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Hint</h2><p>C 語言變數命名規則</p>
+<ul>
+<li>採用英文二十六的大小寫字母為主 (<code>'a-z'</code>, <code>'A-Z'</code>)，另加上數字 <code>'0-9'</code>、底線符號 <code>'_'</code> 及金錢符號 <code>'$'</code></li>
+<li>不以數字開頭</li>
+</ul>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/65.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/65/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app3448" name="dsq-app3448" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F65&amp;t_d=65.%20Expression%20Tree%20%7C%20Judge%20Girl&amp;t_t=65.%20Expression%20Tree%20%7C%20Judge%20Girl#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app8021" name="dsq-app8021" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F65&amp;t_d=65.%20Expression%20Tree%20%7C%20Judge%20Girl&amp;t_t=65.%20Expression%20Tree%20%7C%20Judge%20Girl&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 735px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

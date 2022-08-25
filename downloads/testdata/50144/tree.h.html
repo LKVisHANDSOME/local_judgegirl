@@ -1,0 +1,12 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#ifndef TREE_H_INCLUDED
+#define TREE_H_INCLUDED
+#define MAXN 128
+typedef struct Node{
+    int data;
+    struct Node *left;
+    struct Node *right;
+}Node;
+Node *construct(Node *root, char instruction[MAXN]);
+int query(Node *root, char instruction[MAXN]);
+#endif // TREE_H_INCLUDED
+</pre></body></html>

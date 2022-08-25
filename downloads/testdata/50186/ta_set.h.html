@@ -1,0 +1,18 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdbool.h&gt;
+
+typedef struct ta_set{
+	unsigned long long value;
+	int numberOfElemnet;
+}ta_Set;
+
+void initializeSet(ta_Set* set, int numberOfElemnet);
+
+void addElement(ta_Set* set, int element);
+
+void removeElement(ta_Set* set, int element);
+
+void printSet(ta_Set set);
+
+bool intersect(ta_Set set1, ta_Set set2);
+</pre></body></html>

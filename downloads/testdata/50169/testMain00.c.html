@@ -1,0 +1,30 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "sumOfIntegers.h"
+ 
+int main(int argc, char const *argv[])
+{
+    int a, b, c, d, number = 0;
+    int *numberOfBlocks = &amp;number;
+    const int *ptrArray[16];
+    int answer[16] = {0};
+    scanf("%d%d%d%d", &amp;a, &amp;b, &amp;c, &amp;d);
+    ptrArray[0] = &amp;b;
+    ptrArray[1] = &amp;a;
+    ptrArray[2] = &amp;a;
+    ptrArray[3] = NULL;
+    ptrArray[4] = &amp;d;
+    ptrArray[5] = &amp;a;
+    ptrArray[6] = &amp;b;
+    ptrArray[7] = &amp;b;
+    ptrArray[8] = NULL;
+    ptrArray[9] = &amp;c;
+    ptrArray[10] = NULL;
+    ptrArray[11] = NULL;
+    sumOfIntegers(ptrArray, answer, numberOfBlocks);
+    for(int index = 0; index &lt; *numberOfBlocks; index++) {
+        printf("%d ", answer[index]);
+    }
+    return 0;
+}
+</pre></body></html>

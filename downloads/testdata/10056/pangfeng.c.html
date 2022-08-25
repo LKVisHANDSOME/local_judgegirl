@@ -1,0 +1,42 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include "pangfeng.h"
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+void init(ExamTable *self, int dim) {
+	self-&gt;row_n = 0, self-&gt;dim_n = dim;
+}
+void addrow(ExamTable *self, char *sid, int score[]) {
+	Row *r = &amp;(self-&gt;dat[self-&gt;row_n]);
+	strcpy(r-&gt;sid, sid);
+	for (int i = 0; i &lt; self-&gt;dim_n; i++)
+		r-&gt;score[i] = score[i];
+	(self-&gt;row_n)++;
+}
+static int _sort[128], _sort_dim;
+static int cmp(const void *a, const void *b) {
+	Row *x = *(Row **)a, *y = *(Row **)b;
+	for (int i = 0, s; i &lt; _sort_dim; i++) {
+		s = _sort[i];
+		if (x-&gt;score[s] != y-&gt;score[s])
+			return y-&gt;score[s] - x-&gt;score[s];
+	}
+	return strcmp(x-&gt;sid, y-&gt;sid);
+}
+void print(ExamTable *self, int sort_order[]) {
+	Row *a[256];
+	for (int i = 0; i &lt; self-&gt;row_n; i++)
+		a[i] = &amp;(self-&gt;dat[i]);
+	for (int i = 0; i &lt; self-&gt;dim_n; i++)
+		_sort[i] = sort_order[i];
+	_sort_dim = self-&gt;dim_n;
+	qsort(a, self-&gt;row_n, sizeof(Row*), cmp);
+	puts("----- table begin -----");
+	for (int i = 0; i &lt; self-&gt;row_n; i++) {
+		printf("%s", a[i]-&gt;sid);
+		for (int j = 0; j &lt; self-&gt;dim_n; j++)
+			printf(", %d", a[i]-&gt;score[j]);
+		puts("");
+	}
+	puts("----- end         -----");
+}
+</pre></body></html>

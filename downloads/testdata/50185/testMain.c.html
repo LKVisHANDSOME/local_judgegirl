@@ -1,0 +1,51 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include "set.h"
+
+int main(){
+	char cmd[20];
+	Set s[100];
+	
+	int number_bits;
+	scanf("%d", &amp;number_bits);
+	
+	while(scanf("%s", cmd) != EOF){
+		switch(cmd[0]){
+			case 'i':
+				if(cmd[2] == 'i'){ //init
+					int set_id;
+					scanf("%d", &amp;set_id);
+					initializeSet(&amp;s[set_id], number_bits);
+				}
+				else{ //intersect
+					int set_id1, set_id2;
+					scanf("%d%d", &amp;set_id1, &amp;set_id2);
+					if(intersect(s[set_id1], s[set_id2]))
+						printf("yes\n");
+					else
+						printf("no\n");
+				}
+				break;
+			case 'a':{ //add
+				int element, set_id;
+				scanf("%d", &amp;set_id);
+				scanf("%d", &amp;element);
+				addElement(&amp;s[set_id], element);
+				break;
+			}
+			case 'r':{ //remove
+				int element, set_id;
+				scanf("%d", &amp;set_id);
+				scanf("%d", &amp;element);
+				removeElement(&amp;s[set_id], element);
+				break;
+			}
+			case 'p':{ //print
+				int set_id;
+				scanf("%d", &amp;set_id);
+				printSet(s[set_id]);
+				return 0;
+			}
+				
+		}
+	}
+}</pre></body></html>

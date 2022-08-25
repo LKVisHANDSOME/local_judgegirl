@@ -1,0 +1,207 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">50132. Only Consonants</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=50132.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/50132.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/50132.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<!-- Only Consonants -->
+<h2 class="content-subhead">Task Description</h2><p>We want to count the number of consonants that are alphabetically "less" than the consonant right in front of them, among multiple words. We will be given lines of words. Each word contains at least one letter and all letters are in lowercase. First we remove the vowels from all the words and then imagine that we concatenate all the remaining consonants as a single string. Then we count the number of consonants that are alphabetically "less" than the consonant right in front of them, and print this number as the answer.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_124947"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">a programmer</code></div><div class="line number2 index1 alt1"><code class="plain">is a person</code></div><div class="line number3 index2 alt2"><code class="plain">who creates computer software</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>Let us illustrate the task by Sample Input 3 above. First we put all the consonants into a string  “prgrmmrsprsnwhcrtscmptrsftwr”. Then we compare each letter in this string with the letter right in front of it, and count the answer in the process.</p>
+<ul>
+<li>The first letter 'p' is less than ‘r’ so this does count.</li>
+<li>The second letter 'r' is greater than ‘g’ so this does not count.</li>
+<li>The third letter 'g' is less than ‘r’ so this does count.</li>
+<li>The fourth letter ‘r’ is greater than ‘m’, so this does not count.</li>
+<li>The fifth letter ‘m’ is equal to ‘m’, so this does not count.</li>
+</ul>
+<p>Finally, the count is 15 and we print it out. Please refer to the following figure for an illustration.</p>
+<p></p><div class="pure-u-g"><div class="pure-u-5-5"><a clss="" href="C:\Users\a2320\Desktop\judgegirl/images/problems/p10226.png.html" title="figure"><a class="fancybox" data-caption="figure" data-fancybox="group" href="https://judgegirl.csie.org/images/problems/p10226.png" rel="article0"><img alt="figure" class="pure-img-responsive" src="C:\Users\a2320\Desktop\judgegirl/images/problems/p10226.png"/></a></a><span class="caption">figure</span></div></div><p></p>
+<p>You can use “strtok” function to split a word into multiple strings, which are sequences of contiguous consonants separated by vowels. Then you compute the answer from these strings.</p>
+<p>There is an easy way to count the answer. you can use “strcat” function to concatenate all strings from "strtok" together, then compute the answer by scanning through this long string, as we showed in the figure above. Although this is simple, it wastes memory because you do not need to keep everything in memory in order to compute the answer. Instead you can process the strings from "strtok" one at a time and still be able to count the answer. The idea is to always remember the last character from the previous consonant string. You can only complete subtask 4 by doing this.</p>
+<h2 class="content-subhead">Input Format</h2><p>The input has multiple lines and you must process them until EOF. Each line may have multiple words. All letters are in lowercase and contains at least one consonant.</p>
+<p class="has-jax has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;W&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-1-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" role="math" style="width: 1.076em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.029em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1001.03em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">W<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.096em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.82em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi></math></span></span><script id="MathJax-Element-1" type="math/tex">W</script> is the max length of a word and <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;C&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-2-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" role="math" style="width: 0.796em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.749em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1000.75em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-5"><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math-italic;">C<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.049em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.868em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>C</mi></math></span></span><script id="MathJax-Element-2" type="math/tex">C</script> is the total number of characters (including '\0') in all words.</p>
+<ul>
+<li class="has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;W&lt;/mi&gt;&lt;mo&gt;&amp;#x003C;&lt;/mo&gt;&lt;mn&gt;32&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-3-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-7" role="math" style="width: 3.456em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.363em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1003.32em, 2.336em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-8"><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math-italic;">W<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.096em;"></span></span><span class="mo" id="MathJax-Span-10" style="font-family: MathJax_Main; padding-left: 0.282em;">&lt;</span><span class="mn" id="MathJax-Span-11" style="font-family: MathJax_Main; padding-left: 0.282em;">32</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.094em; border-left: 0px solid; width: 0px; height: 0.82em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>&lt;</mo><mn>32</mn></math></span></span><script id="MathJax-Element-3" type="math/tex">W \lt  32</script></li>
+<li class="has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;C&lt;/mi&gt;&lt;mo&gt;&amp;#x003C;&lt;/mo&gt;&lt;mn&gt;500000&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-4-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-12" role="math" style="width: 5.277em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.09em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1005.04em, 2.336em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-13"><span class="mi" id="MathJax-Span-14" style="font-family: MathJax_Math-italic;">C<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.049em;"></span></span><span class="mo" id="MathJax-Span-15" style="font-family: MathJax_Main; padding-left: 0.282em;">&lt;</span><span class="mn" id="MathJax-Span-16" style="font-family: MathJax_Main; padding-left: 0.282em;">500000</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.094em; border-left: 0px solid; width: 0px; height: 0.868em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>C</mi><mo>&lt;</mo><mn>500000</mn></math></span></span><script id="MathJax-Element-4" type="math/tex">C \lt  500000</script></li>
+</ul>
+<h2 class="content-subhead">Output Format</h2><p>Print the number of consonants that are alphabetically "less" than the consonant right in front of them.</p>
+<h2 class="content-subhead">Subtasks</h2><ul>
+<li>10 points: There is only one word, and this word contains only consonants.</li>
+<li>10 points: There is only one word, and this word contains vowels.</li>
+<li>40 points: Words may contain vowels. The input data is less than 10000 characters.</li>
+<li>40 points: Words may contain vowels. The input data may be large. You may get MLE if your algorithm wastes unnecessary memory.</li>
+</ul>
+<h2 class="content-subhead">Sample Input 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_564427"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">dzffmb</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_559456"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">2</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input 2</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_421935"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">oxaloacetate</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 2</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_938171"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">1</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input 3</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_415546"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">a programmer</code></div><div class="line number2 index1 alt1"><code class="plain">is a person</code></div><div class="line number3 index2 alt2"><code class="plain">who creates computer software</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 3</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_244222"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">15</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample for subtask 1 ~ 3</h2><p>Inside the testdata.</p>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/50132.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/01.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (0%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/02.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (0%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/03.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (0%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 11 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50132/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 12 (10%): 1.0 s, 256 KB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app9983" name="dsq-app9983" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50132&amp;t_d=50132.%20Only%20Consonants&amp;t_t=50132.%20Only%20Consonants#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app7640" name="dsq-app7640" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50132&amp;t_d=50132.%20Only%20Consonants&amp;t_t=50132.%20Only%20Consonants&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 395px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

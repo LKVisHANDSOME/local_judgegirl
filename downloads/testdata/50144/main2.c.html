@@ -1,0 +1,31 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "tree.h"
+int main()
+{
+    char instruction[MAXN];
+    Node node[7];
+    for(int i = 0; i &lt; 7; i++){
+        node[i].left = NULL;
+        node[i].right = NULL;
+    }
+    node[0].data = 2;
+    node[0].left = &amp;node[1];
+    node[1].data = 2;
+    node[1].right = &amp;node[2];
+    node[2].data = 2;
+    node[2].left = &amp;node[3];
+    node[2].right = &amp;node[4];
+    node[3].data = 1;
+    node[3].left = &amp;node[5];
+    node[4].data = 1;
+    node[4].right = &amp;node[6];
+    node[5].data = 1;
+    node[6].data = 1;
+    Node *root = &amp;node[0];
+    while (scanf("%s", instruction) != EOF) {
+        printf("%d\n", query(root, instruction));
+    }
+    return 0;
+}
+</pre></body></html>

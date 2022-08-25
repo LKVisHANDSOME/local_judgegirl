@@ -1,0 +1,175 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+
+#define MAXCOL 6
+#define MAXROW 64
+typedef char string[96];
+typedef enum {INT, STRING} DATATYPE;
+typedef union mData {
+        string str;
+        int num;
+} mData;
+typedef struct Data {
+        mData d;
+} Data;
+void Data_printString(Data *v) {
+        printf("%s", v-&gt;d.str);
+}
+void Data_printNumber(Data *v) {
+        printf("%d", v-&gt;d.num);
+}
+typedef struct SQLRow {
+        Data fields[MAXCOL];
+} SQLRow;
+typedef struct SQLTable {
+        // SQLTable Public Member
+        int colsize, rowsize;
+        string columns[MAXCOL];
+        DATATYPE coltype[MAXCOL];
+        SQLRow data[MAXROW];
+        
+        // SQLTable Public Method
+        int (*columnToIndex) (struct SQLTable*, string*);
+        void (*SQLquery) (struct SQLTable*, char[]);
+        void (*printData[]) (Data*);
+} SQLTable;
+void show_table(SQLTable *table) {
+        for (int i = 0; i &lt; table-&gt;rowsize; i++) {
+                for (int j = 0; j &lt; table-&gt;colsize; j++) {
+                        table-&gt;printData[j](&amp;(table-&gt;data[i].fields[j]));
+                        putchar(j == table-&gt;colsize-1 ? '\n' : ' ');
+                }
+        }
+}
+int columnToIndex(SQLTable *self, string *name) {
+        for (int i = 0; i &lt; self-&gt;colsize; i++)
+                if (!strcmp(*name, self-&gt;columns[i]))
+                        return i;
+        return -1;
+}
+int SQLoperatorToIndex(char *name) {
+        if (!strcmp(name, "&gt;"))         return 0;
+        else if (!strcmp(name, "&lt;"))    return 1;
+        else if (!strcmp(name, "=="))   return 2;
+        else if (!strcmp(name, "!="))   return 3;
+        return -1;
+}
+int fetch_cond(SQLTable *self, SQLRow *row, int lhs, int op, Data *rhs) {
+        if (self-&gt;coltype[lhs] == INT) {
+                if (op == 0)    return row-&gt;fields[lhs].d.num &gt; rhs-&gt;d.num;
+                if (op == 1)    return row-&gt;fields[lhs].d.num &lt; rhs-&gt;d.num;
+                if (op == 2)    return row-&gt;fields[lhs].d.num == rhs-&gt;d.num;
+                if (op == 3)    return row-&gt;fields[lhs].d.num != rhs-&gt;d.num;
+        } else {
+                int cmp = strcmp(row-&gt;fields[lhs].d.str, rhs-&gt;d.str);
+                if (op == 2)    
+                        return cmp == 0;
+                else if (op == 3)               
+                        return cmp != 0;
+        }
+        return 0;
+}
+void SQLquery(SQLTable *self, char cmd[]) {
+        static int selcol[128], seln, has_cond;
+        static int tmpTable[MAXROW];
+        static string s;
+        int tmpsize = self-&gt;rowsize;
+        char *token;
+        
+        for (int i = 0; i &lt; self-&gt;rowsize; i++)
+                tmpTable[i] = i;
+                
+        seln = has_cond = 0;
+        token = strtok(cmd, " ");
+        assert (strcmp(token, "select") == 0);
+        token = strtok(NULL, " ");
+        while (token != NULL) {
+                if (!strcmp(token, "where")) {
+                        has_cond = 1;
+                        token = strtok(NULL, " ");
+                        strcpy(s, token);
+                        int lhs = self-&gt;columnToIndex(self, &amp;s);
+                        token = strtok(NULL, " ");
+                        int op = SQLoperatorToIndex(token);
+                        token = strtok(NULL, " \r\n");
+                        Data rhs;
+                        if (self-&gt;coltype[lhs] == INT)
+                                sscanf(token, "%d", &amp;rhs.d.num);
+                        else if (self-&gt;coltype[lhs] == STRING)
+                                strcpy(rhs.d.str, token);
+                        int tmpn = 0;
+                        for (int i = 0; i &lt; tmpsize; i++) {
+                                if (fetch_cond(self, &amp;(self-&gt;data[tmpTable[i]]), lhs, op, &amp;rhs))
+                                        tmpTable[tmpn++] = tmpTable[i];
+                        }
+                        tmpsize = tmpn;
+                        break;
+                }
+                strcpy(s, token);
+                selcol[seln++] = self-&gt;columnToIndex(self, &amp;s);
+                token = strtok(NULL, " ");
+        }
+        for (int i = 0; i &lt; tmpsize; i++) {
+                int rid = tmpTable[i];
+                for (int j = 0; j &lt; seln; j++) {
+                        self-&gt;printData[selcol[j]](&amp;(self-&gt;data[rid].fields[selcol[j]]));
+                        putchar(j == seln-1 ? '\n' : ' ');
+                }
+        }
+}
+
+
+void create_table(SQLTable *table, const string colname[], const DATATYPE coltype[], int n) {
+        table-&gt;colsize = n;
+        for (int i = 0; i &lt; n; i++) {
+                strcpy(table-&gt;columns[i], colname[i]);
+                table-&gt;coltype[i] = coltype[i];
+                if (coltype[i] == INT)
+                        table-&gt;printData[i] = Data_printNumber;
+                else if (coltype[i] == STRING)
+                        table-&gt;printData[i] = Data_printString;
+        }
+        table-&gt;columnToIndex = columnToIndex;
+        table-&gt;SQLquery = SQLquery;
+}
+
+
+SQLTable table;
+int main() {
+        const string colname[16] = {"lastname", "firstname", "ID", "salary", "age"};
+        const DATATYPE coltype[5] = {STRING, STRING, STRING, INT, INT};
+        create_table(&amp;table, colname, coltype, 5);
+        
+        int N, Q;
+        scanf("%d", &amp;N);
+        
+        table.rowsize = N;
+        for (int i = 0; i &lt; N; i++) {
+                for (int j = 0; j &lt; 3; j++)
+                        scanf("%s", &amp;(table.data[i]).fields[j].d.str);
+                for (int j = 3; j &lt; 5; j++)
+                        scanf("%d", &amp;(table.data[i]).fields[j].d.num);
+        }
+        scanf("%d", &amp;Q);
+        while (getchar() != '\n');
+        
+        char cmd[1024];
+        for (int i = 0; i &lt; Q; i++) {
+                fgets(cmd, 1024, stdin);
+                table.SQLquery(&amp;table, cmd);
+        }
+        return 0;
+}
+/*
+4
+Liu Pangfeng A123456789 80000 40
+Wu Janet B123456789 79999 30
+Liu Kevin C123456789 0 10
+Liu Eric C123456789 0 7
+2
+select lastname firstname ID where salary &gt; 1000
+select firstname lastname salary lastname where lastname == Liu
+*/
+</pre></body></html>

@@ -1,0 +1,254 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">50012. Block Mover with Bit Operations</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=50012.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/50012.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/50012.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Problem Description</h2><p>Write a block moving program. A block is a k by k square in a 8 by 8 grid. The grid has 8 rows (from 0 to 7, top to bottom) and eight columns (from 0 to 7, left to right). A 2 by 2 block with its upper left corner located at row 3 and column 2 is like this.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_938540"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00000000</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">00110000</code></div><div class="line number5 index4 alt2"><code class="plain">00110000</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div></div></td></tr></tbody></table></div></code></pre><p>We can represent a block with an unsigned long long integer, which has 64 bits, therefore the block above can be represented as a binary number like this.
+As a result, we can use fast bit operations, e.g., bitwise and/or and shifting, to implement the following operations (including the initialization of the grid).
+If you do not use bit operatios, it is very likely that your program will receive TLEs.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_345657"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">lowbit                                                   highbit</code></div><div class="line number2 index1 alt1"><code class="plain">0         1         2         3         4         5         6</code></div><div class="line number3 index2 alt2"><code class="plain">0123456789012345678901234567890123456789012345678901234567890123</code></div><div class="line number4 index3 alt1"><code class="plain">0000000000000000000000000011000000110000000000000000000000000000</code></div></div></td></tr></tbody></table></div></code></pre><p><strong>NOTE</strong>: Here the left-top digit on the 8 by 8 grid is the lowest bit of the integer.</p>
+<p>Now given a block as an unsigned 64 bit integer, you need to implement the following functions.</p>
+<ul>
+<li><p><code>void printBlock(unsigned long long int *block);</code><br/>Print a block as indicated above.</p>
+</li>
+<li><p><code>void initialize(unsigned long long int *block, int row, int column, int size);</code><br/>This function will initialize the block so that the left upper corner is located at (row, column), and with size. For example, we can use <code>initialize(&amp;block, 3, 2, 2)</code> to get the block in the previous example.</p>
+</li>
+<li><p><code>int moveLeft(unsigned long long int *block);</code><br/>This function will move the block left by one column. For example, if we call <code>moveLeft(&amp;block)</code> then the block will look like this.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_757300"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00000000</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">01100000</code></div><div class="line number5 index4 alt2"><code class="plain">01100000</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div></div></td></tr></tbody></table></div></code></pre></li>
+<li><p><code>int moveRight(unsigned long long int *block);</code>
+This function will move the block right by one column. For example, if we call moveRight(&amp;block) then the block will look like this.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_130956"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00000000</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">00011000</code></div><div class="line number5 index4 alt2"><code class="plain">00011000</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div></div></td></tr></tbody></table></div></code></pre></li>
+<li><p><code>int moveUp(unsigned long long int *block);</code>
+This function will move the block up by one row. For example, if we call moveUp(&amp;block) then the block will look like this.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_532813"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00000000</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00110000</code></div><div class="line number4 index3 alt1"><code class="plain">00110000</code></div><div class="line number5 index4 alt2"><code class="plain">00000000</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div></div></td></tr></tbody></table></div></code></pre></li>
+<li><p><code>int moveDown(unsigned long long int *block);</code><br/>This function will move the block down by one row. For example, if we call moveDown(&amp;block) then the block will look like this.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_320487"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00000000</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">00000000</code></div><div class="line number5 index4 alt2"><code class="plain">00110000</code></div><div class="line number6 index5 alt1"><code class="plain">00110000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div></div></td></tr></tbody></table></div></code></pre></li>
+</ul>
+<p>Some moves may be invalid. For example, if the block is on row 0 then it cannot be moved up, and if is at column 0 then it cannot be moved left. A move function should return 1 if the move is valid, and 0 if the move is invalid. If the move is invalid, the value of the block should <strong>NOT</strong> be changed.</p>
+<h2 class="content-subhead">Source codes</h2><h3 class="content-subhead">main.c</h3><p><a href="C:\Users\a2320\Desktop\judgegirl/downloads/transfer2020-8j3oc/main.c.html">download main.c</a></p>
+<pre><code class="language-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_724251"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1"><code class="preprocessor">#include "blockmover.h"</code></div><div class="line number3 index2 alt2"> </div><div class="line number4 index3 alt1"><code class="color1 bold">int</code> <code class="plain">main() {</code></div><div class="line number5 index4 alt2"><code class="undefined spaces">    </code><code class="plain">unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">num;</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">    </code><code class="color1 bold">char</code> <code class="plain">operation;</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">ret;</code></div><div class="line number8 index7 alt1"> </div><div class="line number9 index8 alt2"><code class="undefined spaces">    </code><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%llu"</code><code class="plain">, &amp;num);</code></div><div class="line number10 index9 alt1"> </div><div class="line number11 index10 alt2"><code class="undefined spaces">    </code><code class="keyword bold">while</code> <code class="plain">(1) {</code></div><div class="line number12 index11 alt1"><code class="undefined spaces">        </code><code class="plain">ret = 1;</code></div><div class="line number13 index12 alt2"> </div><div class="line number14 index13 alt1"><code class="undefined spaces">        </code><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%c"</code><code class="plain">, &amp;operation);</code></div><div class="line number15 index14 alt2"> </div><div class="line number16 index15 alt1"><code class="undefined spaces">        </code><code class="keyword bold">if</code> <code class="plain">(operation == </code><code class="string">'p'</code><code class="plain">) {</code></div><div class="line number17 index16 alt2"><code class="undefined spaces">            </code><code class="plain">printBlock(&amp;num);</code></div><div class="line number18 index17 alt1"><code class="undefined spaces">            </code><code class="keyword bold">break</code><code class="plain">;</code></div><div class="line number19 index18 alt2"><code class="undefined spaces">        </code><code class="plain">} </code><code class="keyword bold">else</code> <code class="keyword bold">if</code> <code class="plain">(operation == </code><code class="string">'u'</code><code class="plain">)</code></div><div class="line number20 index19 alt1"><code class="undefined spaces">            </code><code class="plain">ret = moveUp(&amp;num);</code></div><div class="line number21 index20 alt2"><code class="undefined spaces">        </code><code class="keyword bold">else</code> <code class="keyword bold">if</code> <code class="plain">(operation == </code><code class="string">'d'</code><code class="plain">)</code></div><div class="line number22 index21 alt1"><code class="undefined spaces">            </code><code class="plain">ret = moveDown(&amp;num);</code></div><div class="line number23 index22 alt2"><code class="undefined spaces">        </code><code class="keyword bold">else</code> <code class="keyword bold">if</code> <code class="plain">(operation == </code><code class="string">'l'</code><code class="plain">)</code></div><div class="line number24 index23 alt1"><code class="undefined spaces">            </code><code class="plain">ret = moveLeft(&amp;num);</code></div><div class="line number25 index24 alt2"><code class="undefined spaces">        </code><code class="keyword bold">else</code> <code class="keyword bold">if</code> <code class="plain">(operation == </code><code class="string">'r'</code><code class="plain">)</code></div><div class="line number26 index25 alt1"><code class="undefined spaces">            </code><code class="plain">ret = moveRight(&amp;num);</code></div><div class="line number27 index26 alt2"><code class="undefined spaces">        </code><code class="keyword bold">else</code> <code class="keyword bold">if</code> <code class="plain">(operation == </code><code class="string">'i'</code><code class="plain">) {</code></div><div class="line number28 index27 alt1"><code class="undefined spaces">            </code><code class="color1 bold">int</code> <code class="plain">row, column, size;</code></div><div class="line number29 index28 alt2"><code class="undefined spaces">            </code><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%d %d %d"</code><code class="plain">, &amp;row, &amp;column, &amp;size);</code></div><div class="line number30 index29 alt1"><code class="undefined spaces">            </code><code class="plain">initialize(&amp;num, row, column, size);</code></div><div class="line number31 index30 alt2"><code class="undefined spaces">        </code><code class="plain">}</code></div><div class="line number32 index31 alt1"> </div><div class="line number33 index32 alt2"><code class="undefined spaces">        </code><code class="keyword bold">if</code> <code class="plain">(ret == 0)</code></div><div class="line number34 index33 alt1"><code class="undefined spaces">            </code><code class="functions bold">printf</code><code class="plain">(</code><code class="string">"Invalid move!\n"</code><code class="plain">);</code></div><div class="line number35 index34 alt2"><code class="undefined spaces">    </code><code class="plain">}</code></div><div class="line number36 index35 alt1"> </div><div class="line number37 index36 alt2"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0;</code></div><div class="line number38 index37 alt1"><code class="plain">}</code></div></div></td></tr></tbody></table></div></code></pre>
+<h3 class="content-subhead">blockmover.h</h3><p><a href="C:\Users\a2320\Desktop\judgegirl/downloads/transfer2020-8j3oc/blockmover.h.html">download blockmover.h</a></p>
+<pre><code class="language-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_949103"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="keyword bold">void</code> <code class="plain">printBlock(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block);</code></div><div class="line number2 index1 alt1"><code class="keyword bold">void</code> <code class="plain">initialize(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block, </code><code class="color1 bold">int</code> <code class="plain">row, </code><code class="color1 bold">int</code> <code class="plain">column, </code><code class="color1 bold">int</code> <code class="plain">size);</code></div><div class="line number3 index2 alt2"><code class="color1 bold">int</code> <code class="plain">moveLeft(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block);</code></div><div class="line number4 index3 alt1"><code class="color1 bold">int</code> <code class="plain">moveRight(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block);</code></div><div class="line number5 index4 alt2"><code class="color1 bold">int</code> <code class="plain">moveUp(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block);</code></div><div class="line number6 index5 alt1"><code class="color1 bold">int</code> <code class="plain">moveDown(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block);</code></div></div></td></tr></tbody></table></div></code></pre>
+<h3 class="content-subhead">blockmover.c</h3><p>Here is the template code.</p>
+<p><a href="C:\Users\a2320\Desktop\judgegirl/downloads/transfer2020-8j3oc/blockmover.c.html">download blockmover.c</a></p>
+<pre><code class="language-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_725646"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include &lt;stdio.h&gt;                                                                              </code></div><div class="line number2 index1 alt1"> </div><div class="line number3 index2 alt2"><code class="comments">// You can write your own functions here. </code></div><div class="line number4 index3 alt1"> </div><div class="line number5 index4 alt2"><code class="keyword bold">void</code> <code class="plain">printBlock(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block) {</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">    </code><code class="comments">// your implementation here</code></div><div class="line number7 index6 alt2"><code class="plain">}</code></div><div class="line number8 index7 alt1"> </div><div class="line number9 index8 alt2"><code class="keyword bold">void</code> <code class="plain">initialize(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block, </code><code class="color1 bold">int</code> <code class="plain">row, </code><code class="color1 bold">int</code> <code class="plain">column, </code><code class="color1 bold">int</code> <code class="plain">size) {</code></div><div class="line number10 index9 alt1"><code class="undefined spaces">    </code><code class="comments">// your implementation here</code></div><div class="line number11 index10 alt2"><code class="plain">}</code></div><div class="line number12 index11 alt1"> </div><div class="line number13 index12 alt2"><code class="color1 bold">int</code> <code class="plain">moveLeft(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block) {</code></div><div class="line number14 index13 alt1"><code class="undefined spaces">    </code><code class="comments">// your implementation here    </code></div><div class="line number15 index14 alt2"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0; </code><code class="comments">// You may change this return value.</code></div><div class="line number16 index15 alt1"><code class="plain">}</code></div><div class="line number17 index16 alt2"> </div><div class="line number18 index17 alt1"><code class="color1 bold">int</code> <code class="plain">moveRight(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block) {</code></div><div class="line number19 index18 alt2"><code class="undefined spaces">    </code><code class="comments">// your implementation here    </code></div><div class="line number20 index19 alt1"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0; </code><code class="comments">// You may change this return value.</code></div><div class="line number21 index20 alt2"><code class="plain">}</code></div><div class="line number22 index21 alt1"> </div><div class="line number23 index22 alt2"><code class="color1 bold">int</code> <code class="plain">moveUp(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block) {</code></div><div class="line number24 index23 alt1"><code class="undefined spaces">    </code><code class="comments">// your implementation here    </code></div><div class="line number25 index24 alt2"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0; </code><code class="comments">// You may change this return value.</code></div><div class="line number26 index25 alt1"><code class="plain">}</code></div><div class="line number27 index26 alt2"> </div><div class="line number28 index27 alt1"><code class="color1 bold">int</code> <code class="plain">moveDown(unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*block) {</code></div><div class="line number29 index28 alt2"><code class="undefined spaces">    </code><code class="comments">// your implementation here    </code></div><div class="line number30 index29 alt1"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0; </code><code class="comments">// You may change this return value.</code></div><div class="line number31 index30 alt2"><code class="plain">}</code></div></div></td></tr></tbody></table></div></code></pre>
+<h3 class="content-subhead">Technical Specification and Constraints</h3><ul>
+<li>20pt. Implement <code>printBlock</code>.</li>
+<li>15pt. Implement <code>printBlock</code>, <code>moveLeft</code>, and <code>moveRight</code>. All moves are valid.</li>
+<li>20pt. Implement <code>printBlock</code>, and all four move functions. All moves are valid.</li>
+<li>30pt. Implement all four move and <code>initialize</code> functions. All moves are valid.</li>
+<li>15pt. Implement all four move and <code>initialize</code> functions. Some moves may be invalid.</li>
+</ul>
+<p>Except illegal moves, all other inputs are valid.</p>
+<h2 class="content-subhead">Sample Inputs and Outputs</h2><p>In input files, the first line is the initial value of <code>block</code>. The following lines are actions. <code>'l'</code> means moving left, <code>'u'</code> means moving up, and so on. <code>'i'</code> means initialization. The three arguments of <code>'i'</code> command mean row, column and size. <code>'p'</code> prints the current block. Once <code>'p'</code> is called, the program ends.</p>
+<h3 class="content-subhead">Sample Input 1</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_559561"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">123628217696256</code></div><div class="line number2 index1 alt1"><code class="plain">l</code></div><div class="line number3 index2 alt2"><code class="plain">u</code></div><div class="line number4 index3 alt1"><code class="plain">p</code></div></div></td></tr></tbody></table></div></code></pre><h3 class="content-subhead">Sample Output 1</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_457475"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00000000</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00011100</code></div><div class="line number4 index3 alt1"><code class="plain">00011100</code></div><div class="line number5 index4 alt2"><code class="plain">00011100</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div></div></td></tr></tbody></table></div></code></pre><h3 class="content-subhead">Sample Input 2</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_343551"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0</code></div><div class="line number2 index1 alt1"><code class="plain">i 4 0 4</code></div><div class="line number3 index2 alt2"><code class="plain">l</code></div><div class="line number4 index3 alt1"><code class="plain">r</code></div><div class="line number5 index4 alt2"><code class="plain">p</code></div></div></td></tr></tbody></table></div></code></pre><h3 class="content-subhead">Sample Output 2</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_105513"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">Invalid move!</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">00000000</code></div><div class="line number5 index4 alt2"><code class="plain">00000000</code></div><div class="line number6 index5 alt1"><code class="plain">01111000</code></div><div class="line number7 index6 alt2"><code class="plain">01111000</code></div><div class="line number8 index7 alt1"><code class="plain">01111000</code></div><div class="line number9 index8 alt2"><code class="plain">01111000</code></div></div></td></tr></tbody></table></div></code></pre><h2 class="content-subhead">Hint</h2><p>To initialize a 2 by 2 block we need to build the following pattern.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_392524"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00000000</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">00000000</code></div><div class="line number5 index4 alt2"><code class="plain">00000000</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000011</code></div><div class="line number8 index7 alt1"><code class="plain">00000011</code></div></div></td></tr></tbody></table></div></code></pre><p>If we write it in binary it will become the following.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_52228"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0000000000000000000000000000000000000000000000000000001100000011</code></div></div></td></tr></tbody></table></div></code></pre><p>To get this pattern we simply take them or of the following.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_431808"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0000000000000000000000000000000000000000000000000000000000000011</code></div><div class="line number2 index1 alt1"><code class="plain">0000000000000000000000000000000000000000000000000000001100000000</code></div></div></td></tr></tbody></table></div></code></pre><p>Then we can use moveUp and moveLeft to move the block into the correct position.</p>
+<p>To detect the cases that we cannot move a block we need to detect whether the block is at row 0 or 7, or column 0, and 7, so we need the following four patterns.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_845172"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">11111111</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">00000000</code></div><div class="line number5 index4 alt2"><code class="plain">00000000</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div><div class="line number9 index8 alt2"> </div><div class="line number10 index9 alt1"><code class="plain">00000000</code></div><div class="line number11 index10 alt2"><code class="plain">00000000</code></div><div class="line number12 index11 alt1"><code class="plain">00000000</code></div><div class="line number13 index12 alt2"><code class="plain">00000000</code></div><div class="line number14 index13 alt1"><code class="plain">00000000</code></div><div class="line number15 index14 alt2"><code class="plain">00000000</code></div><div class="line number16 index15 alt1"><code class="plain">00000000</code></div><div class="line number17 index16 alt2"><code class="plain">11111111</code></div><div class="line number18 index17 alt1"> </div><div class="line number19 index18 alt2"><code class="plain">10000000</code></div><div class="line number20 index19 alt1"><code class="plain">10000000</code></div><div class="line number21 index20 alt2"><code class="plain">10000000</code></div><div class="line number22 index21 alt1"><code class="plain">10000000</code></div><div class="line number23 index22 alt2"><code class="plain">10000000</code></div><div class="line number24 index23 alt1"><code class="plain">10000000</code></div><div class="line number25 index24 alt2"><code class="plain">10000000</code></div><div class="line number26 index25 alt1"><code class="plain">10000000</code></div><div class="line number27 index26 alt2"> </div><div class="line number28 index27 alt1"><code class="plain">00000001</code></div><div class="line number29 index28 alt2"><code class="plain">00000001</code></div><div class="line number30 index29 alt1"><code class="plain">00000001</code></div><div class="line number31 index30 alt2"><code class="plain">00000001</code></div><div class="line number32 index31 alt1"><code class="plain">00000001</code></div><div class="line number33 index32 alt2"><code class="plain">00000001</code></div><div class="line number34 index33 alt1"><code class="plain">00000001</code></div><div class="line number35 index34 alt2"><code class="plain">00000001</code></div></div></td></tr></tbody></table></div></code></pre><p>It is easy to construct the first and second pattern, which is simply 255. In order to construct the fourth pattern, we consider its binary form.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_98904"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0000000100000001000000010000000100000001000000010000000100000001</code></div></div></td></tr></tbody></table></div></code></pre><p>It is easy to see that it can be constructed by taking an "or" on the following.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_625363"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0000000000000000000000000000000000000000000000000000000000000001</code></div><div class="line number2 index1 alt1"><code class="plain">0000000000000000000000000000000000000000000000000000000100000000</code></div><div class="line number3 index2 alt2"><code class="plain">0000000000000000000000000000000000000000000000010000000000000000</code></div><div class="line number4 index3 alt1"><code class="plain">0000000000000000000000000000000000000001000000000000000000000000</code></div><div class="line number5 index4 alt2"><code class="plain">0000000000000000000000000000000100000000000000000000000000000000</code></div><div class="line number6 index5 alt1"><code class="plain">0000000000000000000000010000000000000000000000000000000000000000</code></div><div class="line number7 index6 alt2"><code class="plain">0000000000000001000000000000000000000000000000000000000000000000</code></div><div class="line number8 index7 alt1"><code class="plain">0000000100000000000000000000000000000000000000000000000000000000</code></div></div></td></tr></tbody></table></div></code></pre><p>It is easy then to construct the third pattern from this.</p>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/50012.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/11.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/12.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 11 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/13.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 12 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/14.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 13 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/15.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 14 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/16.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 15 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/17.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 16 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/18.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 17 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/19.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 18 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50012/20.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 19 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app2448" name="dsq-app2448" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50012&amp;t_d=50012.%20Block%20Mover%20with%20Bit%20Operations&amp;t_t=50012.%20Block%20Mover%20with%20Bit%20Operations#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app1347" name="dsq-app1347" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50012&amp;t_d=50012.%20Block%20Mover%20with%20Bit%20Operations&amp;t_t=50012.%20Block%20Mover%20with%20Bit%20Operations&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 724px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

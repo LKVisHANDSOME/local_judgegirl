@@ -1,0 +1,36 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include "node.h"
+#include &lt;stdio.h&gt;
+
+bNode* bNode_getLson(bNode *self) {
+	return self-&gt;lson;
+} 
+bNode* bNode_getRson(bNode *self) {
+	return self-&gt;rson;
+} 
+void bNode_print(bNode *self) {
+	printf("%p L %p R %p\n", self, self-&gt;lson, self-&gt;rson);
+}
+void bNode_setLson(bNode *self, bNode *u) {
+	self-&gt;lson = u;
+}
+void bNode_setRson(bNode *self, bNode *u) {
+	self-&gt;rson = u;
+} 
+
+int bNode_init(bNode *self) {
+	self-&gt;getLson = bNode_getLson;
+	self-&gt;getRson = bNode_getRson;
+	self-&gt;setLson = bNode_setLson;
+	self-&gt;setRson = bNode_setRson;
+	self-&gt;print = bNode_print;
+	self-&gt;lson = NULL, self-&gt;rson = NULL;
+	return 1;
+}
+void bNode_destroy(bNode *obj) {
+}
+
+Object bNodeProto = {
+    .init = bNode_init,
+    .destroy = bNode_destroy
+};
+</pre></body></html>

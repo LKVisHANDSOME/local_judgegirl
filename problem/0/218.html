@@ -1,0 +1,173 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">218. Sum of Selections</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=218.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/218.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/218.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Task Description</h2><p>寫一個程式計算從 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-1"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-2">n</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-1-Frame" tabindex="0"></span><script id="MathJax-Element-1" type="math/tex">n</script> 個不同物品中取不超過 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-3"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-4">m</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-2-Frame" tabindex="0"></span><script id="MathJax-Element-2" type="math/tex">m</script> 個物品的方法總數。可以先寫一個計算 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-5"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-6">C</span><span class="MJXp-mo" id="MJXp-Span-7" style="margin-left: 0em; margin-right: 0em;">(</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-8">n</span><span class="MJXp-mo" id="MJXp-Span-9" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-10">k</span><span class="MJXp-mo" id="MJXp-Span-11" style="margin-left: 0em; margin-right: 0em;">)</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-3-Frame" tabindex="0"></span><script id="MathJax-Element-3" type="math/tex">C(n, k)</script> 的函式，之後計算 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-12"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-13">C</span><span class="MJXp-mo" id="MJXp-Span-14" style="margin-left: 0em; margin-right: 0em;">(</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-15">n</span><span class="MJXp-mo" id="MJXp-Span-16" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-17">k</span><span class="MJXp-mo" id="MJXp-Span-18" style="margin-left: 0em; margin-right: 0em;">)</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-4-Frame" tabindex="0"></span><script id="MathJax-Element-4" type="math/tex">C(n, k)</script>, <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-19"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-20">k</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-5-Frame" tabindex="0"></span><script id="MathJax-Element-5" type="math/tex">k</script> 由 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-21"><span class="MJXp-mn" id="MJXp-Span-22">0</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-6-Frame" tabindex="0"></span><script id="MathJax-Element-6" type="math/tex">0</script> 到 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-23"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-24">m</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-7-Frame" tabindex="0"></span><script id="MathJax-Element-7" type="math/tex">m</script> 的和即可。</p>
+<p><span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math MJXp-display" id="MJXp-Span-25"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-26">F</span><span class="MJXp-mo" id="MJXp-Span-27" style="margin-left: 0em; margin-right: 0em;">(</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-28">n</span><span class="MJXp-mo" id="MJXp-Span-29" style="margin-left: 0em; margin-right: 0.222em;">,</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-30">m</span><span class="MJXp-mo" id="MJXp-Span-31" style="margin-left: 0em; margin-right: 0em;">)</span><span class="MJXp-mo" id="MJXp-Span-32" style="margin-left: 0.333em; margin-right: 0.333em;">=</span><span class="MJXp-munderover" id="MJXp-Span-33"><span><span class="MJXp-over"><span class="MJXp-script"><span class="MJXp-mrow" id="MJXp-Span-39" style="margin-right: 0px; margin-left: 0px;"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-40">m</span></span></span><span class=""><span class="MJXp-mo" id="MJXp-Span-34" style="margin-left: 0.111em; margin-right: 0.167em;"><span class="MJXp-largeop">∑</span></span></span></span></span><span class="MJXp-script"><span class="MJXp-mrow" id="MJXp-Span-35" style="margin-left: 0px;"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-36">i</span><span class="MJXp-mo" id="MJXp-Span-37">=</span><span class="MJXp-mn" id="MJXp-Span-38">0</span></span></span></span><span class="MJXp-mrow" id="MJXp-Span-41"><span class="MJXp-TeXmathchoice" id="MJXp-Span-42"><span class="MJXp-mrow" id="MJXp-Span-43"><span class="MJXp-mo" id="MJXp-Span-44" style="margin-left: 0em; margin-right: 0em; vertical-align: -0.319em;"><span class="MJXp-right MJXp-scale6" style="font-size: 2.274em; margin-left: -0.09em;">(</span></span></span></span><span class="MJXp-mfrac" id="MJXp-Span-45"><span class="MJXp-box"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-46">n</span></span><span class="MJXp-box" style="margin-top: -0.7em;"><span class="MJXp-denom"><span><span class="MJXp-rule" style="height: 1em;"></span></span><span><span class="MJXp-box"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-47">i</span></span></span></span></span></span><span class="MJXp-TeXmathchoice" id="MJXp-Span-48"><span class="MJXp-mrow" id="MJXp-Span-49"><span class="MJXp-mo" id="MJXp-Span-50" style="margin-left: 0em; margin-right: 0em; vertical-align: -0.319em;"><span class="MJXp-right MJXp-scale6" style="font-size: 2.274em; margin-left: -0.09em;">)</span></span></span></span></span></span></span><div class="MathJax_Display MathJax_Processing"><span class="MathJax" id="MathJax-Element-8-Frame" tabindex="0"></span></div><script id="MathJax-Element-8" type="math/tex; mode=display"> F(n, m) = \sum_{i = 0}^{m} \binom{n}{i} </script></p>
+<h2 class="content-subhead">Input</h2><p>輸入只有一行 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-51"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-52">n</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-9-Frame" tabindex="0"></span><script id="MathJax-Element-9" type="math/tex">n</script> 及 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-53"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-54">m</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-10-Frame" tabindex="0"></span><script id="MathJax-Element-10" type="math/tex">m</script>。 </p>
+<h2 class="content-subhead">Output</h2><p>輸出是 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-55"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-56">n</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-11-Frame" tabindex="0"></span><script id="MathJax-Element-11" type="math/tex">n</script> 個不同物品中取不超過 <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-57"><span class="MJXp-mi MJXp-italic" id="MJXp-Span-58">m</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-12-Frame" tabindex="0"></span><script id="MathJax-Element-12" type="math/tex">m</script> 個物品的方法總數。</p>
+<h2 class="content-subhead">Limits</h2><ul>
+<li><span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-59"><span class="MJXp-mn" id="MJXp-Span-60">0</span><span class="MJXp-mo" id="MJXp-Span-61" style="margin-left: 0.333em; margin-right: 0.333em;">&lt;</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-62">n</span><span class="MJXp-mo" id="MJXp-Span-63" style="margin-left: 0.333em; margin-right: 0.333em;">&lt;</span><span class="MJXp-mn" id="MJXp-Span-64">15</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-13-Frame" tabindex="0"></span><script id="MathJax-Element-13" type="math/tex">0 \lt  n \lt  15</script></li>
+<li><span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-65"><span class="MJXp-mn" id="MJXp-Span-66">0</span><span class="MJXp-mo" id="MJXp-Span-67" style="margin-left: 0.333em; margin-right: 0.333em;">≤</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-68">m</span><span class="MJXp-mo" id="MJXp-Span-69" style="margin-left: 0.333em; margin-right: 0.333em;">≤</span><span class="MJXp-mi MJXp-italic" id="MJXp-Span-70">n</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-14-Frame" tabindex="0"></span><script id="MathJax-Element-14" type="math/tex">0 \le m \le n</script></li>
+</ul>
+<h2 class="content-subhead">Sample Input</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_959665"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">5 2</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_94587"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">16</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/218.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/0.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (0%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/218/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app6896" name="dsq-app6896" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F218&amp;t_d=218.%20Sum%20of%20Selections&amp;t_t=218.%20Sum%20of%20Selections#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app1697" name="dsq-app1697" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F218&amp;t_d=218.%20Sum%20of%20Selections&amp;t_t=218.%20Sum%20of%20Selections&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

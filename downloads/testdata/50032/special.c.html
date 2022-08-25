@@ -1,0 +1,57 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+
+void cformat(const char const *buf, int n, int A[]) {
+	// n variable separate by spaces
+    int c = 0, toks = 0;
+    char *ptr = strtok(buf, " \t\n\r");;
+    while (ptr) {
+        assert(sscanf(ptr, "%d", &amp;A[toks]) == 1);
+		toks++, ptr = strtok(NULL, " \t\n\r");
+        assert(toks &lt;= n);
+    }
+    assert(toks == n);
+}
+int main(int argc, char *argv[]) {
+    assert(argc &gt;= 4);
+    FILE *fin0 = fopen(argv[1], "r"),  // testdata in
+        *fin1 = fopen(argv[2], "r"),   // testdata out
+        *fin2 = fopen(argv[3], "r");   // 
+#define MAXN 128
+	int N, M, K;
+    char buf[1024];
+    char g[32][32];
+    while (fscanf(fin0, "%d %d %d", &amp;N, &amp;M, &amp;K) == 3) {
+    	fscanf(fin1, "%s", &amp;buf);
+    	int solvable = !strcmp(buf, "Y");
+    	if (!solvable) {
+    		fgets(buf, 1024, fin2);
+    		assert(sscanf(buf, "%s", g[0]) == 1);
+    		assert(!strcmp("N", g[0]));
+		} else {
+			for (int i = 0; i &lt; N; i++) {	
+				fgets(buf, 1024, fin2);
+				assert(sscanf(buf, "%s", g[i]) == 1);
+				assert(strlen(g[i]) == N);
+			}
+			int C[MAXN] = {}, R[MAXN] = {}, D1[MAXN*2] = {}, D2[MAXN*2] = {};
+			int cnt = 0;
+			for (int i = 0; i &lt; N; i++) {
+				for (int j = 0; j &lt; N; j++) {
+					if (g[i][j] == 'o') {
+						cnt++;
+						C[i]++, R[j]++;
+						D1[i+j]++, D2[i-j + MAXN]++;
+						assert(C[i] &lt;= K &amp;&amp; R[j] &lt;= K &amp;&amp; D1[i+j] &lt;= K &amp;&amp; D2[i-j + MAXN] &lt;= K);
+					}
+				}
+			}
+			assert(cnt == M);
+		}
+	}
+    return 0;
+}
+</pre></body></html>

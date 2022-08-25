@@ -1,0 +1,202 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">269. Memory Allocation</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=269.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/269.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/269.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Task Description</h2><p>Write a program to simulate memory allocation. Recall that we can use malloc to allocate memory. An allocated memory has a starting address and a length, and these allocated memory will not overlap. We want to simulate, after a series of allocations, where the free memory are. Consider the following program:</p>
+<pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_449859"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include"memory.h"</code></div><div class="line number2 index1 alt1"> </div><div class="line number3 index2 alt2"><code class="color1 bold">int</code> <code class="plain">main() {</code></div><div class="line number4 index3 alt1"><code class="undefined spaces">        </code><code class="plain">Memory myMemory;</code></div><div class="line number5 index4 alt2"><code class="undefined spaces">        </code><code class="plain">initMemory(&amp;myMemory, 100);</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 50, 10);</code></div><div class="line number8 index7 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number9 index8 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 70, 10);</code></div><div class="line number10 index9 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number11 index10 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 0, 10);</code></div><div class="line number12 index11 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number13 index12 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 30, 10);</code></div><div class="line number14 index13 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number15 index14 alt2"><code class="undefined spaces">        </code><code class="keyword bold">return</code> <code class="plain">0;</code></div><div class="line number16 index15 alt1"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<p>This program uses a memory object. There are three functions for the memory object.</p>
+<ul>
+<li class="has-jax has-jax"><code>initMemory(Memory *memory, int n)</code><br/>will initialize a memory of size <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-1-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-1" type="math/tex">n</script>. <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;1000000000&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-2-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" role="math" style="width: 9.058em; display: inline-block;"><span style="display: inline-block; position: relative; width: 8.778em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.356em, 1008.73em, 2.43em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-5"><span class="mn" id="MathJax-Span-6" style="font-family: MathJax_Main;">1</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mi" id="MathJax-Span-8" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">n</span><span class="mo" id="MathJax-Span-9" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mn" id="MathJax-Span-10" style="font-family: MathJax_Main; padding-left: 0.282em;">1000000000</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.19em; border-left: 0px solid; width: 0px; height: 0.916em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>≤</mo><mi>n</mi><mo>≤</mo><mn>1000000000</mn></math></span></span><script id="MathJax-Element-2" type="math/tex">1 \le n \le 1000000000</script></li>
+<li class="has-jax"><code>allocateMemory(Memory *memory, int start, int length)</code><br/>allocates a memory block with a starting address and a length. <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mo&gt;&amp;#x003C;&lt;/mo&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;h&lt;/mi&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-3-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-11" role="math" style="width: 13.912em; display: inline-block;"><span style="display: inline-block; position: relative; width: 13.492em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1013.49em, 2.476em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-12"><span class="mn" id="MathJax-Span-13" style="font-family: MathJax_Main;">0</span><span class="mo" id="MathJax-Span-14" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mi" id="MathJax-Span-15" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">s</span><span class="mi" id="MathJax-Span-16" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-17" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-18" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math-italic;">t</span><span class="mo" id="MathJax-Span-20" style="font-family: MathJax_Main; padding-left: 0.282em;">&lt;</span><span class="mi" id="MathJax-Span-21" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">s</span><span class="mi" id="MathJax-Span-22" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-23" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-24" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-25" style="font-family: MathJax_Math-italic;">t</span><span class="mo" id="MathJax-Span-26" style="font-family: MathJax_Main; padding-left: 0.236em;">+</span><span class="mi" id="MathJax-Span-27" style="font-family: MathJax_Math-italic; padding-left: 0.236em;">l</span><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math-italic;">e</span><span class="mi" id="MathJax-Span-29" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-30" style="font-family: MathJax_Math-italic;">g<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mi" id="MathJax-Span-31" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-32" style="font-family: MathJax_Math-italic;">h</span><span class="mo" id="MathJax-Span-33" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mi" id="MathJax-Span-34" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.238em; border-left: 0px solid; width: 0px; height: 1.012em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0</mn><mo>≤</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>t</mi><mo>&lt;</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>t</mi><mo>+</mo><mi>l</mi><mi>e</mi><mi>n</mi><mi>g</mi><mi>t</mi><mi>h</mi><mo>≤</mo><mi>n</mi></math></span></span><script id="MathJax-Element-3" type="math/tex">0 \le start \lt  start + length \le n</script></li>
+<li><code>printMemory(Memory *memory)</code><br/>prints the available free blocks for the current memory.</li>
+</ul>
+<p>The previous program should produce the following output. Initially the entire memory is free so the only free block starts from 0 and is of length 100. After the first allocation starting at 50 and of length 10, there will be two free blocks now -- one starts at 0 with length 50, and the other starts at 60 with length 40. The memory allocation continues so your memory object should record what memory blocks are still free, so that the <code>prtintMemory</code> can print them correctly.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_427210"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">==========</code></div><div class="line number2 index1 alt1"><code class="plain">start 0, length 100</code></div><div class="line number3 index2 alt2"><code class="plain">==========</code></div><div class="line number4 index3 alt1"><code class="plain">start 0, length 50</code></div><div class="line number5 index4 alt2"><code class="plain">start 60, length 40</code></div><div class="line number6 index5 alt1"><code class="plain">==========</code></div><div class="line number7 index6 alt2"><code class="plain">start 0, length 50</code></div><div class="line number8 index7 alt1"><code class="plain">start 60, length 10</code></div><div class="line number9 index8 alt2"><code class="plain">start 80, length 20</code></div><div class="line number10 index9 alt1"><code class="plain">==========</code></div><div class="line number11 index10 alt2"><code class="plain">start 10, length 40</code></div><div class="line number12 index11 alt1"><code class="plain">start 60, length 10</code></div><div class="line number13 index12 alt2"><code class="plain">start 80, length 20</code></div><div class="line number14 index13 alt1"><code class="plain">==========</code></div><div class="line number15 index14 alt2"><code class="plain">start 10, length 20</code></div><div class="line number16 index15 alt1"><code class="plain">start 40, length 10</code></div><div class="line number17 index16 alt2"><code class="plain">start 60, length 10</code></div><div class="line number18 index17 alt1"><code class="plain">start 80, length 20</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>I strongly suggest using a linked list to record the free memory blocks. Whenever we have a memory allocations, we can traverse the list, find the necessary block to update. Note that you may need to insert a new free memory block because one might allocate in the middle of a block. You also need to remove a free block since it may be allocated completely.</p>
+<p>You need to implement the following functions:</p>
+<pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_758292"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="keyword bold">void</code> <code class="plain">initMemory(Memory *memory, </code><code class="color1 bold">int</code> <code class="plain">length);</code></div><div class="line number2 index1 alt1"><code class="keyword bold">void</code> <code class="plain">printMemory(Memory *memory);</code></div><div class="line number3 index2 alt2"><code class="keyword bold">void</code> <code class="plain">allocateMemory(Memory *memory, </code><code class="color1 bold">int</code> <code class="plain">start, </code><code class="color1 bold">int</code> <code class="plain">length);</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<p>The bonus problem is to extend the previous memory object so that it supports free function. This function will release a memory block.</p>
+<ul>
+<li class="has-jax"><code>void freeMemory(Memory *memory, int start, int length);</code><br/><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mo&gt;&amp;#x003C;&lt;/mo&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;h&lt;/mi&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-4-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-35" role="math" style="width: 13.912em; display: inline-block;"><span style="display: inline-block; position: relative; width: 13.492em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1013.49em, 2.476em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-36"><span class="mn" id="MathJax-Span-37" style="font-family: MathJax_Main;">0</span><span class="mo" id="MathJax-Span-38" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mi" id="MathJax-Span-39" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">s</span><span class="mi" id="MathJax-Span-40" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-41" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-42" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-43" style="font-family: MathJax_Math-italic;">t</span><span class="mo" id="MathJax-Span-44" style="font-family: MathJax_Main; padding-left: 0.282em;">&lt;</span><span class="mi" id="MathJax-Span-45" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">s</span><span class="mi" id="MathJax-Span-46" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-47" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-48" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-49" style="font-family: MathJax_Math-italic;">t</span><span class="mo" id="MathJax-Span-50" style="font-family: MathJax_Main; padding-left: 0.236em;">+</span><span class="mi" id="MathJax-Span-51" style="font-family: MathJax_Math-italic; padding-left: 0.236em;">l</span><span class="mi" id="MathJax-Span-52" style="font-family: MathJax_Math-italic;">e</span><span class="mi" id="MathJax-Span-53" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-54" style="font-family: MathJax_Math-italic;">g<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.002em;"></span></span><span class="mi" id="MathJax-Span-55" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-56" style="font-family: MathJax_Math-italic;">h</span><span class="mo" id="MathJax-Span-57" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mi" id="MathJax-Span-58" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.238em; border-left: 0px solid; width: 0px; height: 1.012em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0</mn><mo>≤</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>t</mi><mo>&lt;</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>t</mi><mo>+</mo><mi>l</mi><mi>e</mi><mi>n</mi><mi>g</mi><mi>t</mi><mi>h</mi><mo>≤</mo><mi>n</mi></math></span></span><script id="MathJax-Element-4" type="math/tex">0 \le start \lt  start + length \le n</script></li>
+</ul>
+<p>The main program may look like this now:</p>
+<h2 class="content-subhead">main.c</h2><pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_520469"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include "memory.h"</code></div><div class="line number2 index1 alt1"> </div><div class="line number3 index2 alt2"><code class="color1 bold">int</code> <code class="plain">main() {</code></div><div class="line number4 index3 alt1"><code class="undefined spaces">        </code><code class="plain">Memory myMemory;</code></div><div class="line number5 index4 alt2"><code class="undefined spaces">        </code><code class="plain">initMemory(&amp;myMemory, 100);</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 50, 10);</code></div><div class="line number8 index7 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number9 index8 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 70, 10);</code></div><div class="line number10 index9 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number11 index10 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 0, 10);</code></div><div class="line number12 index11 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number13 index12 alt2"><code class="undefined spaces">        </code><code class="plain">allocateMemory(&amp;myMemory, 30, 10);</code></div><div class="line number14 index13 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number15 index14 alt2"><code class="undefined spaces">        </code><code class="plain">freeMemory(&amp;myMemory, 50, 5);</code></div><div class="line number16 index15 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number17 index16 alt2"><code class="undefined spaces">        </code><code class="plain">freeMemory(&amp;myMemory, 70, 10);</code></div><div class="line number18 index17 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number19 index18 alt2"><code class="undefined spaces">        </code><code class="plain">freeMemory(&amp;myMemory, 30, 10);</code></div><div class="line number20 index19 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number21 index20 alt2"><code class="undefined spaces">        </code><code class="plain">freeMemory(&amp;myMemory, 0, 10);</code></div><div class="line number22 index21 alt1"><code class="undefined spaces">        </code><code class="plain">printMemory(&amp;myMemory);</code></div><div class="line number23 index22 alt2"><code class="undefined spaces">        </code><code class="keyword bold">return</code> <code class="plain">0;</code></div><div class="line number24 index23 alt1"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<p>Now the output should be like this.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_905140"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">==========</code></div><div class="line number2 index1 alt1"><code class="plain">start 0, length 100</code></div><div class="line number3 index2 alt2"><code class="plain">==========</code></div><div class="line number4 index3 alt1"><code class="plain">start 0, length 50</code></div><div class="line number5 index4 alt2"><code class="plain">start 60, length 40</code></div><div class="line number6 index5 alt1"><code class="plain">==========</code></div><div class="line number7 index6 alt2"><code class="plain">start 0, length 50</code></div><div class="line number8 index7 alt1"><code class="plain">start 60, length 10</code></div><div class="line number9 index8 alt2"><code class="plain">start 80, length 20</code></div><div class="line number10 index9 alt1"><code class="plain">==========</code></div><div class="line number11 index10 alt2"><code class="plain">start 10, length 40</code></div><div class="line number12 index11 alt1"><code class="plain">start 60, length 10</code></div><div class="line number13 index12 alt2"><code class="plain">start 80, length 20</code></div><div class="line number14 index13 alt1"><code class="plain">==========</code></div><div class="line number15 index14 alt2"><code class="plain">start 10, length 20</code></div><div class="line number16 index15 alt1"><code class="plain">start 40, length 10</code></div><div class="line number17 index16 alt2"><code class="plain">start 60, length 10</code></div><div class="line number18 index17 alt1"><code class="plain">start 80, length 20</code></div><div class="line number19 index18 alt2"><code class="plain">==========</code></div><div class="line number20 index19 alt1"><code class="plain">start 10, length 20</code></div><div class="line number21 index20 alt2"><code class="plain">start 40, length 15</code></div><div class="line number22 index21 alt1"><code class="plain">start 60, length 10</code></div><div class="line number23 index22 alt2"><code class="plain">start 80, length 20</code></div><div class="line number24 index23 alt1"><code class="plain">==========</code></div><div class="line number25 index24 alt2"><code class="plain">start 10, length 20</code></div><div class="line number26 index25 alt1"><code class="plain">start 40, length 15</code></div><div class="line number27 index26 alt2"><code class="plain">start 60, length 40</code></div><div class="line number28 index27 alt1"><code class="plain">==========</code></div><div class="line number29 index28 alt2"><code class="plain">start 10, length 45</code></div><div class="line number30 index29 alt1"><code class="plain">start 60, length 40</code></div><div class="line number31 index30 alt2"><code class="plain">==========</code></div><div class="line number32 index31 alt1"><code class="plain">start 0, length 55</code></div><div class="line number33 index32 alt2"><code class="plain">start 60, length 40</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>You need to implement the additional function:</p>
+<pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_110784"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="keyword bold">void</code> <code class="plain">freeMemory(Memory *memory, </code><code class="color1 bold">int</code> <code class="plain">start, </code><code class="color1 bold">int</code> <code class="plain">length);</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<p>Notice: In order to avoid linking error, you do have to implement <code>freeMemory</code> even if you don't want to get the bonus points. In this case, just write an empty function like this:</p>
+<pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_816487"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="keyword bold">void</code> <code class="plain">freeMemory(Memory *memory, </code><code class="color1 bold">int</code> <code class="plain">start, </code><code class="color1 bold">int</code> <code class="plain">length) {</code></div><div class="line number2 index1 alt1"><code class="undefined spaces">    </code><code class="comments">/* to do */</code></div><div class="line number3 index2 alt2"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/269.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/0.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/11.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/13.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/14.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (4%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/16.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (4%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/18.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (4%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/19.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 11 (4%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/269/20.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 12 (4%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app9473" name="dsq-app9473" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F269&amp;t_d=269.%20Memory%20Allocation&amp;t_t=269.%20Memory%20Allocation#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app6735" name="dsq-app6735" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F269&amp;t_d=269.%20Memory%20Allocation&amp;t_t=269.%20Memory%20Allocation&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 376px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

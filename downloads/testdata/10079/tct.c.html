@@ -1,0 +1,56 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include "tct.h"
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+static int printSep(int n, int gap[], int newline) {
+	putchar(' ');
+	for (int i = 1; i &lt; n; i++) {
+		int m = gap[i] - gap[i-1];
+		while (m--)	putchar(' ');
+		putchar('|');
+	}
+	if (newline)
+		puts("");
+}
+static int rprint(int dep, int padding, Directory *dir, int gap[]) {
+	Directory *u = dir-&gt;childDir;
+	gap[dep] = padding;
+	if (dir-&gt;childDir != NULL) {
+		printSep(dep, gap, 0);
+		puts("  |");
+	}
+	while (u != NULL) {
+		printSep(dep, gap, 0);
+		printf("  +- %s\n", u-&gt;name);
+		rprint(dep+1, padding+2, u, gap);
+		u = u-&gt;silbingDir;
+		if (u != NULL) {
+			printSep(dep, gap, 0);
+			puts("  |");
+		}
+	}
+}
+void tree(Directory *fs) {
+	printf("+- %s\n", fs-&gt;name);
+	int lines = 0, gap[256] = {2};
+	rprint(1, 4, fs, gap);
+}
+Directory* cd(Directory *fs, char path[]) {
+	Directory *ret = fs;
+	char *p = strtok(path, "/");
+	while (p != NULL) {
+		Directory *u = ret-&gt;childDir;
+		while (u != NULL) {
+			if (!strcmp(u-&gt;name, p))
+				break;
+			u = u-&gt;silbingDir;
+		}
+		if (u == NULL)	return NULL;
+		ret = u;
+		p = strtok(NULL, "/");
+	}
+	return ret;
+}
+</pre></body></html>

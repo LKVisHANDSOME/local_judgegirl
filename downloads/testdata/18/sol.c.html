@@ -1,0 +1,29 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+const int INF = 2147483647;
+ 
+int map[1010][1010];
+int dx[] = {1,0,-1,0};
+int dy[] = {0,1,0,-1};
+int main(){
+    int res = 0;
+    int y,x;
+    scanf("%d %d",&amp;y,&amp;x);
+    for(int i=1;i&lt;=y;i++)
+        for(int j=1;j&lt;=x;j++)
+            scanf("%d",&amp;map[i][j]);
+    for(int i=0;i&lt;=y+1;i++)
+        map[i][x+1] = map[i][0] = -100;
+    for(int i=0;i&lt;=x+1;i++)
+        map[y+1][0] = map[0][i] = -100;
+    for(int i=1;i&lt;=y;i++)
+        for(int j=1;j&lt;=x;j++){
+            int high = 1;
+            for(int d=0;d&lt;4;d++)
+                if(map[i+dy[d]][j+dx[d]] &gt;= map[i][j])
+                    high = 0;
+            if(high) res++;
+        }
+    printf("%d\n",res);
+    return 0;
+}
+</pre></body></html>

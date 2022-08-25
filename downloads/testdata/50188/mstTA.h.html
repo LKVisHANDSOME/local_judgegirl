@@ -1,0 +1,13 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdbool.h&gt;
+#define MAXNUMOFCITY 32
+
+typedef struct mstTA {
+  int adj[MAXNUMOFCITY][MAXNUMOFCITY], N;
+} MSTTA;
+
+void initTA(MSTTA *mst, int N);
+void addRoadTA(MSTTA *mst, int city1, int city2, int len);
+int removeRoadTA(MSTTA *mst, int city1, int city2);
+bool hasPathTA(MSTTA *mst, int city1, int city2);
+bool connectedTA(MSTTA *mst);
+</pre></body></html>

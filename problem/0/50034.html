@@ -1,0 +1,231 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">50034. See-saw</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=50034.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/50034.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/50034.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Problem Description</h2><p class="has-jax has-jax has-jax has-jax">Given a set of odd positive integers and build a balanced see-saw. Imagine that we have a stick of length <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-1-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-1" type="math/tex">n</script>, where <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-2-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-5"><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-2" type="math/tex">n</script> is an odd number, and a set of <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-3-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-7" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-8"><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-3" type="math/tex">n</script> positive integers. Now we support the stick in the middle and place the <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-4-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-10" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-11"><span class="mi" id="MathJax-Span-12" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-4" type="math/tex">n</script> numbers along the stick evenly, and we have a see-saw. Now please place the numbers so that the see-saw is balanced.</p>
+<p class="has-jax has-jax">Let us consider an example. Let <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-5-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-13" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-14"><span class="mi" id="MathJax-Span-15" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-5" type="math/tex">n</script> be 5 and the numbers are 1, 2, 3, 1, and 5. If we place the numbers as 3, 1, 5, 3, 2 then the seesaw is balanced because <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mn&gt;3&lt;/mn&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;3&lt;/mn&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-6-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-16" role="math" style="width: 13.258em; display: inline-block;"><span style="display: inline-block; position: relative; width: 12.838em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.356em, 1012.79em, 2.383em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-17"><span class="mn" id="MathJax-Span-18" style="font-family: MathJax_Main;">3</span><span class="mo" id="MathJax-Span-19" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-20" style="font-family: MathJax_Main; padding-left: 0.236em;">2</span><span class="mo" id="MathJax-Span-21" style="font-family: MathJax_Main; padding-left: 0.236em;">+</span><span class="mn" id="MathJax-Span-22" style="font-family: MathJax_Main; padding-left: 0.236em;">1</span><span class="mo" id="MathJax-Span-23" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-24" style="font-family: MathJax_Main; padding-left: 0.236em;">1</span><span class="mo" id="MathJax-Span-25" style="font-family: MathJax_Main; padding-left: 0.282em;">=</span><span class="mn" id="MathJax-Span-26" style="font-family: MathJax_Main; padding-left: 0.282em;">3</span><span class="mo" id="MathJax-Span-27" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-28" style="font-family: MathJax_Main; padding-left: 0.236em;">1</span><span class="mo" id="MathJax-Span-29" style="font-family: MathJax_Main; padding-left: 0.236em;">+</span><span class="mn" id="MathJax-Span-30" style="font-family: MathJax_Main; padding-left: 0.236em;">2</span><span class="mo" id="MathJax-Span-31" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-32" style="font-family: MathJax_Main; padding-left: 0.236em;">2</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.142em; border-left: 0px solid; width: 0px; height: 0.868em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3</mn><mo>×</mo><mn>2</mn><mo>+</mo><mn>1</mn><mo>×</mo><mn>1</mn><mo>=</mo><mn>3</mn><mo>×</mo><mn>1</mn><mo>+</mo><mn>2</mn><mo>×</mo><mn>2</mn></math></span></span><script id="MathJax-Element-6" type="math/tex">3 \times 2 + 1 \times 1 = 3 \times 1 + 2 \times 2</script>.</p>
+<p></p><div class="pure-u-g"><div class="pure-u-5-5"><a clss="" href="C:\Users\a2320\Desktop\judgegirl/images/problems/p10076-seesaw2.png.html" title="p10076-seesaw"><a class="fancybox" data-caption="p10076-seesaw" data-fancybox="group" href="https://judgegirl.csie.org/images/problems/p10076-seesaw2.png" rel="article0"><img alt="p10076-seesaw" class="pure-img-responsive" src="C:\Users\a2320\Desktop\judgegirl/images/problems/p10076-seesaw2.png"/></a></a><span class="caption">p10076-seesaw</span></div></div><p></p>
+<p class="has-jax">Another vaild solution is 2, 1, 3, 1 because <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;3&lt;/mn&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-7-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-33" role="math" style="width: 16.199em; display: inline-block;"><span style="display: inline-block; position: relative; width: 15.732em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.356em, 1015.69em, 2.383em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-34"><span class="mn" id="MathJax-Span-35" style="font-family: MathJax_Main;">2</span><span class="mi" id="MathJax-Span-36" style="font-family: MathJax_Math-italic;">w</span><span class="mo" id="MathJax-Span-37" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-38" style="font-family: MathJax_Main; padding-left: 0.236em;">2</span><span class="mo" id="MathJax-Span-39" style="font-family: MathJax_Main; padding-left: 0.236em;">+</span><span class="mn" id="MathJax-Span-40" style="font-family: MathJax_Main; padding-left: 0.236em;">1</span><span class="mi" id="MathJax-Span-41" style="font-family: MathJax_Math-italic;">w</span><span class="mo" id="MathJax-Span-42" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-43" style="font-family: MathJax_Main; padding-left: 0.236em;">1</span><span class="mo" id="MathJax-Span-44" style="font-family: MathJax_Main; padding-left: 0.282em;">=</span><span class="mn" id="MathJax-Span-45" style="font-family: MathJax_Main; padding-left: 0.282em;">3</span><span class="mi" id="MathJax-Span-46" style="font-family: MathJax_Math-italic;">w</span><span class="mo" id="MathJax-Span-47" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-48" style="font-family: MathJax_Main; padding-left: 0.236em;">1</span><span class="mo" id="MathJax-Span-49" style="font-family: MathJax_Main; padding-left: 0.236em;">+</span><span class="mn" id="MathJax-Span-50" style="font-family: MathJax_Main; padding-left: 0.236em;">1</span><span class="mi" id="MathJax-Span-51" style="font-family: MathJax_Math-italic;">w</span><span class="mo" id="MathJax-Span-52" style="font-family: MathJax_Main; padding-left: 0.236em;">×</span><span class="mn" id="MathJax-Span-53" style="font-family: MathJax_Main; padding-left: 0.236em;">2</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.142em; border-left: 0px solid; width: 0px; height: 0.868em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><mi>w</mi><mo>×</mo><mn>2</mn><mo>+</mo><mn>1</mn><mi>w</mi><mo>×</mo><mn>1</mn><mo>=</mo><mn>3</mn><mi>w</mi><mo>×</mo><mn>1</mn><mo>+</mo><mn>1</mn><mi>w</mi><mo>×</mo><mn>2</mn></math></span></span><script id="MathJax-Element-7" type="math/tex">2w \times 2 + 1w \times 1 = 3w \times 1 + 1w \times 2</script></p>
+<h2 class="content-subhead">Subtasks</h2><ul>
+<li class="has-jax">5pt. <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;3&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-8-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-54" role="math" style="width: 2.523em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.43em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.356em, 1002.38em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-55"><span class="mi" id="MathJax-Span-56" style="font-family: MathJax_Math-italic;">n</span><span class="mo" id="MathJax-Span-57" style="font-family: MathJax_Main; padding-left: 0.282em;">=</span><span class="mn" id="MathJax-Span-58" style="font-family: MathJax_Main; padding-left: 0.282em;">3</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.82em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>=</mo><mn>3</mn></math></span></span><script id="MathJax-Element-8" type="math/tex">n = 3</script></li>
+<li class="has-jax">10pt. <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;5&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-9-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-59" role="math" style="width: 2.523em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.43em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.356em, 1002.38em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-60"><span class="mi" id="MathJax-Span-61" style="font-family: MathJax_Math-italic;">n</span><span class="mo" id="MathJax-Span-62" style="font-family: MathJax_Main; padding-left: 0.282em;">=</span><span class="mn" id="MathJax-Span-63" style="font-family: MathJax_Main; padding-left: 0.282em;">5</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.82em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>=</mo><mn>5</mn></math></span></span><script id="MathJax-Element-9" type="math/tex">n = 5</script></li>
+<li class="has-jax">30pt. <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-10-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-64" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-65"><span class="mi" id="MathJax-Span-66" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-10" type="math/tex">n</script> is no more than 9</li>
+<li class="has-jax">55pt. <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-11-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-67" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-68"><span class="mi" id="MathJax-Span-69" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-11" type="math/tex">n</script> is no more than 17</li>
+</ul>
+<h2 class="content-subhead">Input Format</h2><p>There are many cases in one input file. Please read the input file until the EOF.</p>
+<p class="has-jax">For each case, there are two lines in each case. The first line  contains a number <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-12-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-70" role="math" style="width: 0.656em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.589em, 1000.61em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-71"><span class="mi" id="MathJax-Span-72" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.579em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script id="MathJax-Element-12" type="math/tex">n</script> which means the number of the set of the positive integers. And then there are n numbers in the second line which means the set of the positive integers.</p>
+<h2 class="content-subhead">Output Format</h2><p>If the see-saw can be balanced, print one possible solution.</p>
+<p>If the see-saw can not be balanced, print <code>N</code>.</p>
+<h2 class="content-subhead">Sample Input 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_256392"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">3</code></div><div class="line number2 index1 alt1"><code class="plain">1 1 6</code></div><div class="line number3 index2 alt2"><code class="plain">3</code></div><div class="line number4 index3 alt1"><code class="plain">9 4 5</code></div><div class="line number5 index4 alt2"><code class="plain">3</code></div><div class="line number6 index5 alt1"><code class="plain">9 5 9</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 1</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_723399"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">1 _^_ 1</code></div><div class="line number2 index1 alt1"><code class="plain">N</code></div><div class="line number3 index2 alt2"><code class="plain">9 _^_ 9</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input 2</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_495028"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">5</code></div><div class="line number2 index1 alt1"><code class="plain">1 2 3 1 5</code></div><div class="line number3 index2 alt2"><code class="plain">9</code></div><div class="line number4 index3 alt1"><code class="plain">3 9 1 3 7 5 5 2 8</code></div><div class="line number5 index4 alt2"><code class="plain">11</code></div><div class="line number6 index5 alt1"><code class="plain">8 2 7 1 1 9 9 1 3 9 4</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output 2</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_346020"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">2 1 _^_ 3 1</code></div><div class="line number2 index1 alt1"><code class="plain">8 3 1 3 _^_ 9 7 5 2</code></div><div class="line number3 index2 alt2"><code class="plain">3 9 1 1 8 _^_ 2 7 9 4 1</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/50034.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/11.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/12.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 11 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/13.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 12 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/14.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 13 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/15.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 14 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/16.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 15 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/17.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 16 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/18.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 17 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/19.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 18 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/20.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 19 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50034/21.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 20 (0%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app302" name="dsq-app302" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50034&amp;t_d=50034.%20See-saw%20%7C%20Judge%20Girl&amp;t_t=50034.%20See-saw%20%7C%20Judge%20Girl#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app117" name="dsq-app117" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50034&amp;t_d=50034.%20See-saw%20%7C%20Judge%20Girl&amp;t_t=50034.%20See-saw%20%7C%20Judge%20Girl&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 395px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

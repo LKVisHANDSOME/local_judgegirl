@@ -1,0 +1,53 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+
+void check_format(const char const *buf, int n) {       // n variable separate by spaces
+        int c = 0, toks = 0;
+        for (int i = 0; buf[i]; i++)
+                if (isspace(buf[i]))
+                        c++;
+        assert(c == n);
+        char *ptr = buf;
+        while ((ptr = strpbrk(ptr, " \t\n\r")) != NULL)
+                toks++, ptr++;
+        assert(toks == n);
+}
+int main(int argc, char *argv[]) {
+        assert(argc &gt;= 4);
+        FILE *fin0 = fopen(argv[1], "r"),       // testdata in
+                 *fin1 = fopen(argv[2], "r"),   // testdata out
+                 *fin2 = fopen(argv[3], "r");   // 
+        int n, m, x, y, type;
+        char buf[1024];
+        fgets(buf, 1024, fin0);
+        if (sscanf(buf, "%d %d", &amp;n, &amp;m) != 2)
+                return 1;
+                
+        int grid[128][128] = {}, acc = 0;
+        const int dx[4][3] = {{-1, -1, 0}, {-1, 0, 0}, {0, 0, -1}, {-1, 0, -1}};
+        const int dy[4][3] = {{-1, 0, -1}, {-1, -1, 0}, {0, -1, 0}, {0, 0, -1}};
+        while (fgets(buf, 1024, fin2)) {
+                check_format(buf, 3);
+                assert(sscanf(buf, "%d %d %d", &amp;type, &amp;x, &amp;y) == 3);
+                assert(0 &lt; x &amp;&amp; x &lt; n);
+                assert(0 &lt; y &amp;&amp; y &lt; n);
+                assert(0 &lt; type &amp;&amp; type &lt; 5);
+                type--;
+                int tx, ty;
+                for (int i = 0; i &lt; 3; i++) {
+                        tx = x + dx[type][i];
+                        ty = y + dy[type][i];
+                        assert(0 &lt;= tx &amp;&amp; tx &lt; n);
+                        assert(0 &lt;= ty &amp;&amp; ty &lt; n);
+                        assert(tx &lt;= n-m || ty &lt;= n-m);
+                        assert(grid[tx][ty] == 0);
+                        grid[tx][ty] = 1;
+                        acc++;
+                }
+        }
+        assert(acc == n*n - m*m);
+        return 0;
+}
+</pre></body></html>

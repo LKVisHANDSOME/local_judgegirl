@@ -1,0 +1,19 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int main(){
+    srand(time(NULL));
+    int n = 100;
+    printf("%d\n", n);
+    for (int i=0;i&lt;n;i++) {
+        if(i) printf(" ");
+        if(rand()%4==0) {
+            printf("0");
+        } else {
+            printf("1");
+        }
+    }printf("\n");
+    for(int i=1;i&lt;=500000000;i++);
+    return 0;
+}</pre></body></html>

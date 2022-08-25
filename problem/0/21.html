@@ -1,0 +1,182 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">21. Maximum in Matrix</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=21.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/21.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/21.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Task Description</h2><p>Write a function max to find the largest number in a <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-1"><span class="MJXp-mn" id="MJXp-Span-2">5</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-1-Frame" tabindex="0"></span><script id="MathJax-Element-1" type="math/tex">5</script> by <span class="MathJax_Preview" style="color: inherit;"><span class="MJXp-math" id="MJXp-Span-3"><span class="MJXp-mn" id="MJXp-Span-4">5</span></span></span><span class="MathJax MathJax_Processing" id="MathJax-Element-2-Frame" tabindex="0"></span><script id="MathJax-Element-2" type="math/tex">5</script> integer array. The prototype of max is as follows.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_741068"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="color1 bold">int</code> <code class="plain">max(</code><code class="color1 bold">int</code> <code class="plain">array[5][5]);</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>The main program is as follows.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_382844"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1"><code class="preprocessor">#include "max.h"</code></div><div class="line number3 index2 alt2"> </div><div class="line number4 index3 alt1"><code class="color1 bold">int</code> <code class="plain">main() {</code></div><div class="line number5 index4 alt2"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">i, j;</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">array[5][5];</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">    </code><code class="keyword bold">for</code> <code class="plain">(i = 0; i &lt; 5; i++)</code></div><div class="line number8 index7 alt1"><code class="undefined spaces">        </code><code class="keyword bold">for</code> <code class="plain">(j = 0; j &lt; 5; j++)</code></div><div class="line number9 index8 alt2"><code class="undefined spaces">              </code><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%d"</code><code class="plain">, &amp;(array[i][j]));</code></div><div class="line number10 index9 alt1"><code class="undefined spaces">      </code><code class="functions bold">printf</code><code class="plain">(</code><code class="string">"%d\n"</code><code class="plain">, max(array));</code></div><div class="line number11 index10 alt2"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0;</code></div><div class="line number12 index11 alt1"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Input Format</h2><p>There are five lines in the input. Each line has five integers.</p>
+<h2 class="content-subhead">Output Format</h2><p>There is one line in the output. The line has the maximum value in the matrix.</p>
+<h2 class="content-subhead">Sample Input</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_880355"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">1 2 3 4 5</code></div><div class="line number2 index1 alt1"><code class="plain">7 -7 7 7 7</code></div><div class="line number3 index2 alt2"><code class="plain">8 9 -10 11 2</code></div><div class="line number4 index3 alt1"><code class="plain">45 8 9 45 3</code></div><div class="line number5 index4 alt2"><code class="plain">0 0 0 0 0</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Output</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_192783"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">45</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Compile</h2><h3 class="content-subhead">Command Line</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_790750"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">gcc main.c max.c -std=c99</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Dev-C++</h3><ul>
+<li>設定編譯參數 Tools &gt; Compiler Options &gt; <i class="fa fa-check-square-o"></i> Add the following commands when calling the linker &gt; -static-libgcc -std=c99 max.c</li>
+<li>回到 main.c 執行編譯 F11</li>
+</ul>
+<h2 class="content-subhead">Hint</h2><h3 class="content-subhead">max.h</h3><p>打上 function header 以及相關的設定。</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_886113"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="color1 bold">int</code> <code class="plain">max(</code><code class="color1 bold">int</code> <code class="plain">array[5][5]);</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">max.c</h3><p>撰寫程式碼後對應上傳。</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_423070"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include "max.h"</code></div><div class="line number2 index1 alt1"><code class="color1 bold">int</code> <code class="plain">max(</code><code class="color1 bold">int</code> <code class="plain">array[5][5]) {</code></div><div class="line number3 index2 alt2"><code class="undefined spaces">    </code><code class="comments">/* add your code */</code></div><div class="line number4 index3 alt1"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">main.c</h3><p>這個檔案無法更改也無須上傳。</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_248985"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1"><code class="preprocessor">#include "max.h"</code></div><div class="line number3 index2 alt2"> </div><div class="line number4 index3 alt1"><code class="color1 bold">int</code> <code class="plain">main() {</code></div><div class="line number5 index4 alt2"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">i, j;</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">array[5][5];</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">    </code><code class="keyword bold">for</code> <code class="plain">(i = 0; i &lt; 5; i++)</code></div><div class="line number8 index7 alt1"><code class="undefined spaces">        </code><code class="keyword bold">for</code> <code class="plain">(j = 0; j &lt; 5; j++)</code></div><div class="line number9 index8 alt2"><code class="undefined spaces">              </code><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%d"</code><code class="plain">, &amp;(array[i][j]));</code></div><div class="line number10 index9 alt1"><code class="undefined spaces">      </code><code class="functions bold">printf</code><code class="plain">(</code><code class="string">"%d\n"</code><code class="plain">, max(array));</code></div><div class="line number11 index10 alt2"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0;</code></div><div class="line number12 index11 alt1"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/21.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/0.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (0%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/21/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (10%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app9463" name="dsq-app9463" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F21&amp;t_d=21.%20Maximum%20in%20Matrix&amp;t_t=21.%20Maximum%20in%20Matrix#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app9456" name="dsq-app9456" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F21&amp;t_d=21.%20Maximum%20in%20Matrix&amp;t_t=21.%20Maximum%20in%20Matrix&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 0px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

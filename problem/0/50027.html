@@ -1,0 +1,231 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">50027. File Sorter</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=50027.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/50027.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/50027.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Problem Description</h2><p>You are given a name of a binary file consisting of structures. Your program should read the structures from this file, remove those structures that contain errors, and sort the remaining valid structures, and write them to another file. The structure is like the following.</p>
+<h3 class="content-subhead">fs.h</h3><pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_552735"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#ifndef _FS_H</code></div><div class="line number2 index1 alt1"><code class="preprocessor">#define _FS_h</code></div><div class="line number3 index2 alt2"> </div><div class="line number4 index3 alt1"><code class="keyword bold">typedef</code> <code class="keyword bold">struct</code> <code class="plain">{</code></div><div class="line number5 index4 alt2"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">balance;</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">    </code><code class="color1 bold">char</code> <code class="plain">name[128];</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">gender;</code></div><div class="line number8 index7 alt1"><code class="plain">} Account;</code></div><div class="line number9 index8 alt2"> </div><div class="line number10 index9 alt1"><code class="preprocessor">#endif</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<p>A structure is invalid if any of the following is true.</p>
+<ul>
+<li>The balance is negative</li>
+<li>The name (as a string) contains anything other than letters and space</li>
+<li>The gender is not 0 or 1</li>
+</ul>
+<p>We should sort the structure according to their names. It is guaranteed that no two names will be the same.</p>
+<h2 class="content-subhead">Subtasks</h2><ul>
+<li>15pt. The file has only one structure, and it is valid.</li>
+<li>15pt. The file has only one structure, and it may be invalid.</li>
+<li class="has-jax">40pt. The file may have more than one structure (<span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;1024&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-1-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" role="math" style="width: 3.176em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.083em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1003.04em, 2.43em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-2"><span class="mo" id="MathJax-Span-3" style="font-family: MathJax_Main;">≤</span><span class="mn" id="MathJax-Span-4" style="font-family: MathJax_Main; padding-left: 0.282em;">1024</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.19em; border-left: 0px solid; width: 0px; height: 0.916em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≤</mo><mn>1024</mn></math></span></span><script id="MathJax-Element-1" type="math/tex">\leq 1024</script>), and they are all valid.</li>
+<li class="has-jax">30pt. The file may have more than one structure (<span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;1024&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-2-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-5" role="math" style="width: 3.176em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.083em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1003.04em, 2.43em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-6"><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main;">≤</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.282em;">1024</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.19em; border-left: 0px solid; width: 0px; height: 0.916em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≤</mo><mn>1024</mn></math></span></span><script id="MathJax-Element-2" type="math/tex">\leq 1024</script>), and they could be invalid.</li>
+</ul>
+<h2 class="content-subhead">Sample Input (stdin)</h2><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_478573"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">p50027-in.dat p50027-out.dat</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Input (p50027-in.dat)</h2><p class="has-jax has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-3-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" role="math" style="width: 0.936em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.889em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1000.89em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-10"><span class="mi" id="MathJax-Span-11" style="font-family: MathJax_Math-italic;">N<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.096em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.82em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math></span></span><script id="MathJax-Element-3" type="math/tex">N</script> valid or invalid structures in binary format. Read this file until <code>EOF</code>. ( <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;1024&lt;/mn&gt;&lt;/math&gt;' id="MathJax-Element-4-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-12" role="math" style="width: 5.977em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.79em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1005.74em, 2.43em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-13"><span class="mn" id="MathJax-Span-14" style="font-family: MathJax_Main;">1</span><span class="mo" id="MathJax-Span-15" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mi" id="MathJax-Span-16" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">n</span><span class="mo" id="MathJax-Span-17" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mn" id="MathJax-Span-18" style="font-family: MathJax_Main; padding-left: 0.282em;">1024</span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.19em; border-left: 0px solid; width: 0px; height: 0.916em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>≤</mo><mi>n</mi><mo>≤</mo><mn>1024</mn></math></span></span><script id="MathJax-Element-4" type="math/tex">1 \leq n \leq 1024</script> )</p>
+<h2 class="content-subhead">Sample Output (p50027-out.dat)</h2><p class="has-jax has-jax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-5-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-19" role="math" style="width: 1.123em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.076em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1001.08em, 2.289em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-20"><span class="mi" id="MathJax-Span-21" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.096em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.046em; border-left: 0px solid; width: 0px; height: 0.82em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi></math></span></span><script id="MathJax-Element-5" type="math/tex">M</script> valid structures in binary format. ( <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" data-mathml='&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;/math&gt;' id="MathJax-Element-6-Frame" role="presentation" style="position: relative;" tabindex="0"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-22" role="math" style="width: 3.41em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.316em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.309em, 1003.32em, 2.43em, -999.998em); top: -2.145em; left: 0.002em;"><span class="mrow" id="MathJax-Span-23"><span class="mi" id="MathJax-Span-24" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.096em;"></span></span><span class="mo" id="MathJax-Span-25" style="font-family: MathJax_Main; padding-left: 0.282em;">≤</span><span class="mi" id="MathJax-Span-26" style="font-family: MathJax_Math-italic; padding-left: 0.282em;">N<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.096em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.149em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.19em; border-left: 0px solid; width: 0px; height: 0.964em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi><mo>≤</mo><mi>N</mi></math></span></span><script id="MathJax-Element-6" type="math/tex">M \leq N</script> )</p>
+<h2 class="content-subhead">p10065-in.dat</h2><p>download <a href="C:\Users\a2320\Desktop\judgegirl/downloads/p50027-in.dat.html">p50027-in.dat</a>, <a href="C:\Users\a2320\Desktop\judgegirl/downloads/p50027-out.dat.html">p50027-out.dat</a></p>
+<pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_238399"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">Account A = {</code></div><div class="line number2 index1 alt1"><code class="undefined spaces">    </code><code class="plain">.balance = 50,</code></div><div class="line number3 index2 alt2"><code class="undefined spaces">    </code><code class="plain">.name = {</code><code class="string">'p'</code><code class="plain">, </code><code class="string">'a'</code><code class="plain">, </code><code class="string">'n'</code><code class="plain">, </code><code class="string">'g'</code><code class="plain">, </code><code class="string">'\0'</code><code class="plain">},</code></div><div class="line number4 index3 alt1"><code class="undefined spaces">    </code><code class="plain">.gender = 1</code></div><div class="line number5 index4 alt2"><code class="plain">};</code></div><div class="line number6 index5 alt1"><code class="plain">Account B = {</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">    </code><code class="plain">.balance = 100,</code></div><div class="line number8 index7 alt1"><code class="undefined spaces">    </code><code class="plain">.name = {</code><code class="string">'f'</code><code class="plain">, </code><code class="string">'e'</code><code class="plain">, </code><code class="string">'n'</code><code class="plain">, </code><code class="string">'g'</code><code class="plain">, </code><code class="string">'\0'</code><code class="plain">},</code></div><div class="line number9 index8 alt2"><code class="undefined spaces">    </code><code class="plain">.gender = 0</code></div><div class="line number10 index9 alt1"><code class="plain">};</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_640852"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">morris821028@morris821028-PC MINGW64 ~/Desktop/demo</code></div><div class="line number2 index1 alt1"><code class="plain">$ xxd p50027-in.dat</code></div><div class="line number3 index2 alt2"><code class="plain">00000000: 3200 0000 7061 6e67 0000 0000 0000 0000  2...pang........</code></div><div class="line number4 index3 alt1"><code class="plain">00000010: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number5 index4 alt2"><code class="plain">00000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number6 index5 alt1"><code class="plain">00000030: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number7 index6 alt2"><code class="plain">00000040: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number8 index7 alt1"><code class="plain">00000050: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number9 index8 alt2"><code class="plain">00000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number10 index9 alt1"><code class="plain">00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number11 index10 alt2"><code class="plain">00000080: 0000 0000 0100 0000 6400 0000 6665 6e67  ........d...feng</code></div><div class="line number12 index11 alt1"><code class="plain">00000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number13 index12 alt2"><code class="plain">000000a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number14 index13 alt1"><code class="plain">000000b0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number15 index14 alt2"><code class="plain">000000c0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number16 index15 alt1"><code class="plain">000000d0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number17 index16 alt2"><code class="plain">000000e0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number18 index17 alt1"><code class="plain">000000f0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number19 index18 alt2"><code class="plain">00000100: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number20 index19 alt1"> </div><div class="line number21 index20 alt2"><code class="plain">morris821028@morris821028-PC MINGW64 ~/Desktop/demo</code></div><div class="line number22 index21 alt1"><code class="plain">$ ./main</code></div><div class="line number23 index22 alt2"><code class="plain">p50027-in.dat p50027-out.dat</code></div><div class="line number24 index23 alt1"> </div><div class="line number25 index24 alt2"><code class="plain">morris821028@morris821028-PC MINGW64 ~/Desktop/demo</code></div><div class="line number26 index25 alt1"><code class="plain">$ xxd p50027-out.dat</code></div><div class="line number27 index26 alt2"><code class="plain">00000000: 6400 0000 6665 6e67 0000 0000 0000 0000  d...feng........</code></div><div class="line number28 index27 alt1"><code class="plain">00000010: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number29 index28 alt2"><code class="plain">00000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number30 index29 alt1"><code class="plain">00000030: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number31 index30 alt2"><code class="plain">00000040: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number32 index31 alt1"><code class="plain">00000050: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number33 index32 alt2"><code class="plain">00000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number34 index33 alt1"><code class="plain">00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number35 index34 alt2"><code class="plain">00000080: 0000 0000 0000 0000 3200 0000 7061 6e67  ........2...pang</code></div><div class="line number36 index35 alt1"><code class="plain">00000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number37 index36 alt2"><code class="plain">000000a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number38 index37 alt1"><code class="plain">000000b0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number39 index38 alt2"><code class="plain">000000c0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number40 index39 alt1"><code class="plain">000000d0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number41 index40 alt2"><code class="plain">000000e0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number42 index41 alt1"><code class="plain">000000f0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</code></div><div class="line number43 index42 alt2"><code class="plain">00000100: 0000 0000 0000 0000 0000 0000 0100 0000  ................</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/50027.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/11.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/12.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 11 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/13.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 12 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/14.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 13 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/15.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 14 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/16.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 15 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/17.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 16 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/18.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 17 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/19.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 18 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50027/20.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 19 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app878" name="dsq-app878" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50027&amp;t_d=50027.%20File%20Sorter%20%7C%20Judge%20Girl&amp;t_t=50027.%20File%20Sorter%20%7C%20Judge%20Girl#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app1822" name="dsq-app1822" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50027&amp;t_d=50027.%20File%20Sorter%20%7C%20Judge%20Girl&amp;t_t=50027.%20File%20Sorter%20%7C%20Judge%20Girl&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 699px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>

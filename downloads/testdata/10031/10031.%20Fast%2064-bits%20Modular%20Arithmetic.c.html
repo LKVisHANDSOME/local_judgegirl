@@ -1,0 +1,21 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#define INT64 long long
+long long mul(long long a, long long b, long long mod) { 
+	long long ret = 0; 
+	for (a %= mod, b %= mod; b != 0; b&gt;&gt;=1, a &lt;&lt;= 1, a = a &gt;= mod ? a - mod : a) { 
+		if (b&amp;1) {
+			ret += a;
+			if (ret &gt;= mod) 
+				ret -= mod;
+		} 
+	} 
+	return ret; 
+}
+int main() {
+	INT64 a, b, n;
+	while (scanf("%lld %lld %lld", &amp;a, &amp;b, &amp;n) == 3) {
+		printf("%lld\n", mul(a, b, n));
+	}
+	return 0;
+}
+</pre></body></html>

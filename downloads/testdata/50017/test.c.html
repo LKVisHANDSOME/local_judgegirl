@@ -1,0 +1,64 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+
+int subset(int numbers[], int n, int K, int S){
+  int i;
+  int temp[30];
+
+  if(S==0 &amp;&amp; K==0){
+    return 1;
+  }
+
+  for(i=0;i&lt;n;i++){
+    if(numbers[i]){
+      if((K-numbers[i])&gt;=0){
+        K-=numbers[i];
+        temp[i]=numbers[i];
+        numbers[i]=0;
+
+        /*printf("Got %d\n",temp[i]);
+         *                 printf("Now have");
+         *                                 for(j=0;j&lt;=i;j++){
+         *                                                     if(!numbers[j]){
+         *                                                                             printf(" %d",temp[j]);
+         *                                                                                                 }
+         *                                                                                                                 }
+         *                                                                                                                                 printf("\n");
+         *                                                                                                                                                 printf("S-1=%d K=%d\n",S-1,K);*/
+
+        if(subset(numbers, n, K, S-1) &amp;&amp; K&gt;=0 &amp;&amp; (S-1)&gt;=0){
+          return 1;
+        }
+
+        numbers[i]=temp[i];
+        K+=numbers[i];
+
+        /*printf("Decard %d\n",temp[i]);
+         *                 printf("Now have");
+         *                                 for(j=0;j&lt;=i;j++){
+         *                                                     if(!numbers[j]){
+         *                                                                             printf(" %d",temp[j]);
+         *                                                                                                 }
+         *                                                                                                                 }
+         *                                                                                                                                 printf("\n");
+         *                                                                                                                                                 printf("S-1=%d K=%d\n",S-1,K);*/
+
+      }
+    }
+  }
+  return 0;
+}
+
+
+int main() {
+  int  i,n, K, S;
+
+  while (scanf("%d %d %d", &amp;n, &amp;K, &amp;S) == 3) {
+    int A[128];
+    for (i = 0; i &lt; n; i++)
+      scanf("%d", &amp;A[i]);
+    printf("%d\n", subset(A, n, K, S ));
+  }
+  return 0;
+}
+
+</pre></body></html>

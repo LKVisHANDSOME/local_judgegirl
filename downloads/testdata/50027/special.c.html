@@ -1,0 +1,39 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+
+int fsize(FILE *fp) {
+    int prev = ftell(fp);
+    fseek(fp, 0L, SEEK_END);
+    int size = ftell(fp);
+    fseek(fp, prev, SEEK_SET);
+    return size;
+}
+
+typedef struct {
+    int balance;
+    char name[128];
+    int gender;
+} Account;
+
+int main(int argc, char *argv[]) {
+    assert(argc &gt;= 4);
+    FILE *fin0 = fopen(argv[1], "r"),  // testdata in
+    	*fin1 = fopen(argv[2], "r"),   // testdata out
+        *fin2 = fopen(argv[3], "r");   // user output
+        
+    assert(fsize(fin1) == fsize(fin2));
+    int n = fsize(fin1) / sizeof(Account);
+    for (int i = 0; i &lt; n; i++) {
+    	Account t1, t2;
+    	fread(&amp;t1, sizeof(t1), 1, fin1);
+    	fread(&amp;t2, sizeof(t2), 1, fin2);
+    	assert(t1.balance == t2.balance);
+    	assert(strcmp(t1.name, t2.name) == 0);
+    	assert(t1.gender == t2.gender);
+	}
+    return 0;
+}
+</pre></body></html>

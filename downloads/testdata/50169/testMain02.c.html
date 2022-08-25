@@ -1,0 +1,49 @@
+<html><head><meta content="light dark" name="color-scheme"/></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "sumOfIntegers.h"
+ 
+int main(int argc, char const *argv[])
+{
+    int a, b, c, d, e, f, g, h, number = 0;
+    int *numberOfBlocks = &amp;number;
+    const int *ptrArray[32];
+    int answer[32] = {0};
+    scanf("%d%d%d%d%d%d%d%d", &amp;a, &amp;b, &amp;c, &amp;d, &amp;e, &amp;f, &amp;g, &amp;h);
+    ptrArray[0] = &amp;b;
+    ptrArray[1] = NULL;
+    ptrArray[2] = &amp;c;
+    ptrArray[3] = &amp;e;
+    ptrArray[4] = &amp;a;
+    ptrArray[5] = &amp;b;
+    ptrArray[6] = &amp;a;
+    ptrArray[7] = &amp;c;
+    ptrArray[8] = &amp;c;
+    ptrArray[9] = &amp;g;
+    ptrArray[10] = &amp;c;
+    ptrArray[11] = &amp;b;
+    ptrArray[12] = &amp;g;
+    ptrArray[13] = &amp;e;
+    ptrArray[14] = &amp;a;
+    ptrArray[15] = &amp;f;
+    ptrArray[16] = &amp;g;
+    ptrArray[17] = &amp;b;
+    ptrArray[18] = &amp;a;
+    ptrArray[19] = &amp;a;
+    ptrArray[20] = NULL;
+    ptrArray[21] = &amp;d;
+    ptrArray[22] = NULL;
+    ptrArray[23] = &amp;c;
+    ptrArray[24] = &amp;g;
+    ptrArray[25] = &amp;e;
+    ptrArray[26] = &amp;d;
+    ptrArray[27] = NULL;
+    ptrArray[28] = &amp;c;
+    ptrArray[29] = NULL;
+    ptrArray[30] = NULL;
+    sumOfIntegers(ptrArray, answer, numberOfBlocks);
+    for(int index = 0; index &lt; *numberOfBlocks; index++) {
+        printf("%d ", answer[index]);
+    }
+    return 0;
+}
+</pre></body></html>

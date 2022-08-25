@@ -1,0 +1,245 @@
+<section id="main">
+<link href="/stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css"/>
+<script src="/javascripts/codemirror-5.18.2/lib/codemirror.js" type="text/javascript"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldcode.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/brace-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/xml-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/markdown-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/fold/comment-fold.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/display/fullscreen.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/edit/matchbrackets.js"></script>
+<script src="/javascripts/codemirror-5.18.2/addon/mode/clike.js"></script>
+<link href="/javascripts/codemirror-5.18.2/lib/codemirror.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/fold/foldgutter.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/theme/monokai.css" rel="stylesheet"/>
+<link href="/javascripts/codemirror-5.18.2/addon/display/fullscreen.css" rel="stylesheet"/>
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+  min-height: 500px;
+}
+</style>
+<div class="header">
+<h1 class="article-title">50013. Bingo</h1>
+<h2>I'm a slow walker, but I never walk backwards.</h2>
+</div>
+<div class="content">
+<div class="pure-menu pure-menu-horizontal">
+<ul class="pure-menu-list" data-intro="調閱此題的 &lt;b&gt;個人提交紀錄&lt;/b&gt;、&lt;b&gt;整體狀態&lt;/b&gt;、&lt;b&gt;統計結果&lt;/b&gt;、&lt;b&gt;參考解答&lt;/b&gt;" data-step="13">
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/submissions?pid=50013.html">Status</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/statistic/problem/0/50013.html">Statistics</a></li>
+<li class="pure-menu-item"><a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/solution/problem/0/50013.html">Solution</a></li>
+</ul>
+</div>
+<div data-intro="&lt;p&gt;描述中 &lt;i class='fa fa-clipboard'&gt;&lt;/i&gt; 按鈕可協助你複製到剪貼簿，並貼到本機實驗。&lt;/p&gt; &lt;p&gt;若題目有特殊的字元格式，那在範例輸入/輸出測資不適用複製貼上，請務必小心&lt;/p&gt;" data-step="14">
+<h2 class="content-subhead">Problem Description</h2><p>Write a program to play bingo. The bingo is played on a 8 by 8 grid. The grid has 8 rows (from 0 to 7, top to bottom) and eight columns (from 0 to 7, left to right). For example, this is a bingo board.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_596384"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">00100100</code></div><div class="line number2 index1 alt1"><code class="plain">00000100</code></div><div class="line number3 index2 alt2"><code class="plain">11000100</code></div><div class="line number4 index3 alt1"><code class="plain">01111111</code></div><div class="line number5 index4 alt2"><code class="plain">00110100</code></div><div class="line number6 index5 alt1"><code class="plain">01000100</code></div><div class="line number7 index6 alt2"><code class="plain">01000100</code></div><div class="line number8 index7 alt1"><code class="plain">00000100</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>A bingo board can be easily represented as a 64 bit unsigned long long integer. For example, the bingo board above can easily represented as the following binary number.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_960192"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">highbit                                                   lowbit</code></div><div class="line number2 index1 alt1"><code class="undefined spaces">   </code><code class="plain">6         5         4         3         2         1         0</code></div><div class="line number3 index2 alt2"><code class="plain">3210987654321098765432109876543210987654321098765432109876543210</code></div><div class="line number4 index3 alt1"><code class="plain">0010010000000100110001000111111100110100010001000100010000000100</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>Now given a bingo board, please determine if you have a bingo. A board has a bingo if any  of the following conditions is true.</p>
+<ol>
+<li>The bingo board has all 1's in a row.</li>
+<li>The bingo board has all 1's in a column.</li>
+<li>The bingo board has all 1's in either diagonal.</li>
+</ol>
+<p>You need to implement the following functions to determine if a given board has a bingo. The return value should be 0 if the board does not have a bingo. It should return 1 if the first condition is satisfied, 2 the second condition, 3 the third condition. If multiple conditions are satisfied, you should return the smallest one. </p>
+<pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_825488"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="color1 bold">int</code> <code class="plain">bingo(</code><code class="keyword bold">const</code> <code class="plain">unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*board, </code><code class="color1 bold">int</code> <code class="plain">*rowColumn);</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<p>Also you need to set the <code>rowColumn</code> variable as the smallest row and column index if you have a bingo. If you have the third condition, you should set <code>rowColumn</code> to 0 for the diagonal from (0, 0) to (7, 7), and 1 for the diagonal from (0, 7) to (7, 0). Note that (0, 0) is the upper left corner of the board.  If you have both, then set <code>rowColumn</code> to 0.</p>
+<h2 class="content-subhead">Subtasks</h2><ul>
+<li>10pt. The board has exactly 8 1's, and all of them are in row 7.</li>
+<li>10pt. The board has exactly 8 1's, and all of them are in the same row, which could be row 5, 6, or 7.</li>
+<li>20pt. You only need to check the first bingo condition.</li>
+<li>10pt. The board has exactly 8 1's, and all of them are in the same column, which could be column 5, 6, or 7. Note that solving this subtask does not guarantee that your solution can solve the first three subcases. However, this subtask will help you solve the task in identifying the second condition. </li>
+<li>35pt. You only need to check the first and the second bingo conditions.</li>
+<li>15pt. You need to check all bingo conditions.</li>
+</ul>
+<h2 class="content-subhead">Source codes</h2><h3 class="content-subhead">main.c</h3><pre><code class="lang-c"><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter" id="highlighter_494075"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1"><code class="preprocessor">#include "bingo.h"</code></div><div class="line number3 index2 alt2"><code class="color1 bold">int</code> <code class="plain">main(</code><code class="keyword bold">void</code><code class="plain">)</code></div><div class="line number4 index3 alt1"><code class="plain">{</code></div><div class="line number5 index4 alt2"><code class="undefined spaces">    </code><code class="plain">unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">board;</code></div><div class="line number6 index5 alt1"><code class="undefined spaces">    </code><code class="color1 bold">int</code> <code class="plain">res = 0, rowColumn = 0;</code></div><div class="line number7 index6 alt2"><code class="undefined spaces">    </code><code class="functions bold">scanf</code><code class="plain">(</code><code class="string">"%llu"</code><code class="plain">, &amp;board);</code></div><div class="line number8 index7 alt1"><code class="undefined spaces">    </code><code class="plain">res = bingo(&amp;board, &amp;rowColumn);</code></div><div class="line number9 index8 alt2"><code class="undefined spaces">    </code><code class="keyword bold">if</code><code class="plain">(res == 0) </code><code class="functions bold">printf</code><code class="plain">(</code><code class="string">"no\n"</code><code class="plain">);</code></div><div class="line number10 index9 alt1"><code class="undefined spaces">    </code><code class="keyword bold">else</code> <code class="functions bold">printf</code><code class="plain">(</code><code class="string">"%d %d\n"</code><code class="plain">, res, rowColumn);</code></div><div class="line number11 index10 alt2"><code class="undefined spaces">    </code><code class="keyword bold">return</code> <code class="plain">0;</code></div><div class="line number12 index11 alt1"><code class="plain">}</code></div></div></td></tr></tbody></table></div>
+</code></pre>
+<h3 class="content-subhead">bingo.h</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_111502"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="color1 bold">int</code> <code class="plain">bingo(</code><code class="keyword bold">const</code> <code class="plain">unsigned </code><code class="color1 bold">long</code> <code class="color1 bold">long</code> <code class="color1 bold">int</code> <code class="plain">*board, </code><code class="color1 bold">int</code> <code class="plain">*rowColumn);</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Sample Inputs and Outputs</h2><h3 class="content-subhead">Sample Board 1</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_364240"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number2 index1 alt1"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number3 index2 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number4 index3 alt1"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number5 index4 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number6 index5 alt1"><code class="plain">1 1 1 1 1 1 1 1</code></div><div class="line number7 index6 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number8 index7 alt1"><code class="plain">0 0 0 0 0 0 0 0</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Sample Input 1</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_236789"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">16711680</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Sample Output 1</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_983921"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">1 5</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Sample Board 2</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_435692"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number2 index1 alt1"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number3 index2 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number4 index3 alt1"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number5 index4 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number6 index5 alt1"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number7 index6 alt2"><code class="plain">0 0 0 0 0 0 0 0</code></div><div class="line number8 index7 alt1"><code class="plain">1 1 1 1 1 1 1 0</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Sample Input 2</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_724193"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">254</code></div></div></td></tr></tbody></table></div>
+</code></pre><h3 class="content-subhead">Sample Output 2</h3><pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_974180"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">no</code></div></div></td></tr></tbody></table></div>
+</code></pre><h2 class="content-subhead">Hint</h2><p>For detecting the first and the second bingo conditions we need to detect whether one rwo or column are full of 1's. For example, we need to following four patterns to detect row 0 and 7, and column 0 and 7.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_124324"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">11111111</code></div><div class="line number2 index1 alt1"><code class="plain">00000000</code></div><div class="line number3 index2 alt2"><code class="plain">00000000</code></div><div class="line number4 index3 alt1"><code class="plain">00000000</code></div><div class="line number5 index4 alt2"><code class="plain">00000000</code></div><div class="line number6 index5 alt1"><code class="plain">00000000</code></div><div class="line number7 index6 alt2"><code class="plain">00000000</code></div><div class="line number8 index7 alt1"><code class="plain">00000000</code></div><div class="line number9 index8 alt2"> </div><div class="line number10 index9 alt1"><code class="plain">00000000</code></div><div class="line number11 index10 alt2"><code class="plain">00000000</code></div><div class="line number12 index11 alt1"><code class="plain">00000000</code></div><div class="line number13 index12 alt2"><code class="plain">00000000</code></div><div class="line number14 index13 alt1"><code class="plain">00000000</code></div><div class="line number15 index14 alt2"><code class="plain">00000000</code></div><div class="line number16 index15 alt1"><code class="plain">00000000</code></div><div class="line number17 index16 alt2"><code class="plain">11111111</code></div><div class="line number18 index17 alt1"> </div><div class="line number19 index18 alt2"><code class="plain">10000000</code></div><div class="line number20 index19 alt1"><code class="plain">10000000</code></div><div class="line number21 index20 alt2"><code class="plain">10000000</code></div><div class="line number22 index21 alt1"><code class="plain">10000000</code></div><div class="line number23 index22 alt2"><code class="plain">10000000</code></div><div class="line number24 index23 alt1"><code class="plain">10000000</code></div><div class="line number25 index24 alt2"><code class="plain">10000000</code></div><div class="line number26 index25 alt1"><code class="plain">10000000</code></div><div class="line number27 index26 alt2"> </div><div class="line number28 index27 alt1"> </div><div class="line number29 index28 alt2"><code class="plain">00000001</code></div><div class="line number30 index29 alt1"><code class="plain">00000001</code></div><div class="line number31 index30 alt2"><code class="plain">00000001</code></div><div class="line number32 index31 alt1"><code class="plain">00000001</code></div><div class="line number33 index32 alt2"><code class="plain">00000001</code></div><div class="line number34 index33 alt1"><code class="plain">00000001</code></div><div class="line number35 index34 alt2"><code class="plain">00000001</code></div><div class="line number36 index35 alt1"><code class="plain">00000001</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>It is easy to construct the first and second pattern, which is simply 255. In order to construc the fourth pattern, we consider its binary form.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_431342"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0000000100000001000000010000000100000001000000010000000100000001</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>It is easy to see that it can be construicted by taking an "or" on the following.</p>
+<pre><code><span class="fw-code-copy-button pure-button"><i class="fa fa-clipboard"></i></span><div class="syntaxhighlighter nogutter" id="highlighter_89429"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain">0000000000000000000000000000000000000000000000000000000000000001</code></div><div class="line number2 index1 alt1"><code class="plain">0000000000000000000000000000000000000000000000000000000100000000</code></div><div class="line number3 index2 alt2"><code class="plain">0000000000000000000000000000000000000000000000010000000000000000</code></div><div class="line number4 index3 alt1"><code class="plain">0000000000000000000000000000000000000001000000000000000000000000</code></div><div class="line number5 index4 alt2"><code class="plain">0000000000000000000000000000000100000000000000000000000000000000</code></div><div class="line number6 index5 alt1"><code class="plain">0000000000000000000000010000000000000000000000000000000000000000</code></div><div class="line number7 index6 alt2"><code class="plain">0000000000000001000000000000000000000000000000000000000000000000</code></div><div class="line number8 index7 alt1"><code class="plain">0000000100000000000000000000000000000000000000000000000000000000</code></div></div></td></tr></tbody></table></div>
+</code></pre><p>It is easy then to construct the third pattern from this.</p>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 pure-u-lg-1" data-intro="&lt;p&gt;請在登入 &lt;i class='fa fa-sign-in'&gt;&lt;/i&gt; 後，進行程式碼提交。&lt;/p&gt; 可以選擇上傳程式&lt;b&gt;原始碼&lt;/b&gt;檔案 (建議使用，不易發生錯誤) 或 貼上程式碼至文字區塊 (&lt;kbd&gt;F11&lt;/kbd&gt; 全螢幕編輯、&lt;kbd&gt;Esc&lt;/kbd&gt; 退出全螢幕)" data-step="15">
+<h2 class="content-subhead">Submit</h2>
+<a class="button-success pure-button" href="C:\Users\a2320\Desktop\judgegirl/login.html"><i class="fa fa-sign-in"></i> Login</a>
+</div>
+<div class="pure-u-1 pure-u-lg-1" data-intro="每一筆測資的&lt;b&gt;運行時間&lt;/b&gt;、&lt;b&gt;空間大小限制&lt;/b&gt;。部分題目提供測試資料下載，若尚未公布，請向助教詢問是否可公布測試資料。" data-step="16">
+<h2 class="content-subhead">Testdata Set</h2>
+<a href="C:\Users\a2320\Desktop\judgegirl/testdata/download/50013.html"><i class="fa fa-download"></i> Download Testdata</a>
+<div class="pure-menu">
+<ul class="pure-menu-list">
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/1.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 0 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/2.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 1 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/3.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 2 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/4.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 3 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/5.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 4 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/6.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 5 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/7.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 6 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/8.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 7 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/9.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 8 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/10.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 9 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/11.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 10 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/12.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 11 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/13.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 12 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/14.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 13 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/15.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 14 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/16.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 15 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/17.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 16 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/18.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 17 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/19.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 18 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+<li class="pure-menu-item">
+<a class="pure-menu-link" href="C:\Users\a2320\Desktop\judgegirl/downloads/testdata/50013/20.in.html" style="padding: 0em 0.1em;" target="_blank">
+	    			Subtask 19 (5%): 1.0 s, 64 MB
+	    			</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2> Discussion</h2>
+<div id="disqus_recommendations" style="margin-bottom: 12px;"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app4229" name="dsq-app4229" scrolling="no" src="https://disqus.com/recommendations/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50013&amp;t_d=50013.%20Bingo%20%7C%20Judge%20Girl&amp;t_t=50013.%20Bingo%20%7C%20Judge%20Girl#version=9d352c9674ae8172f8669d3aa3a905e9" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 271px !important; display: inline !important; box-sizing: border-box !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div><div class="dsq-widget" id="disqus_thread"><iframe allowtransparency="true" frameborder="0" horizontalscrolling="no" id="dsq-app6024" name="dsq-app6024" scrolling="no" src="https://disqus.com/embed/comments/?base=default&amp;f=ntucsiecprogramming&amp;t_u=https%3A%2F%2Fjudgegirl.csie.org%2Fproblem%2F0%2F50013&amp;t_d=50013.%20Bingo%20%7C%20Judge%20Girl&amp;t_t=50013.%20Bingo%20%7C%20Judge%20Girl&amp;s_o=default#version=ad2eac0e6aa7c265937636beaab16a92" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 395px !important;" tabindex="0" title="Disqus" verticalscrolling="no" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ntucsiecprogramming';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+<script src="/javascripts/clipboard/clipboard.min.js"></script>
+<script>
+new Clipboard(".fw-code-copy-button", {
+  text: function(trigger) {
+  	var $rows = $(trigger).next().find('.code').find('.line');
+  	var rowDelim = '\n';
+  	return '' + $rows.map(function(i, row) {
+  		var $row = $(row);
+  		return $row.text().replace(/\s/g, " ");
+  	}).get().join(rowDelim);
+  }
+});
+$('.upload-switch-button').click(function(elem) {
+		var target = $(this).attr('data-id');
+		var target2 = $(this).attr('data-file-id');
+		if ($(this).attr('data-show') == "false") {
+			$('#' + target).css('display', 'visibility');
+			$('#' + target2).css('display', 'none');
+			$(this).attr('data-show', "true");
+			$(this).html('<i class="fa fa-angle-up" aria-hidden="true"> or upload file ... </i>');
+		} else {
+			$('#' + target).css('display', 'none');
+			$('#' + target2).css('display', 'visibility');
+			$(this).attr('data-show', "false");
+			$(this).html('<i class="fa fa-angle-down" aria-hidden="true"> or paste your code ... </i>');
+		}
+});
+</script>
+<script src="/javascripts/intro/intro.js"></script>
+<link href="/javascripts/intro/introjs.css" rel="stylesheet"/>
+<script type="text/javascript">
+  if (RegExp('multipage', 'gi').test(window.location.search)) {
+    var tour = introJs().setOption('doneLabel', 'Next page');
+    tour.goToStepNumber(13);
+    tour.setOption('tooltipPosition', 'auto');
+    tour.start().oncomplete(function() {
+      window.location.href = '/submissions?pid=3?multipage=true';
+    });
+    $('.introjs-bullets li a')[0].className = 'active';
+  }
+</script>
+</section>
